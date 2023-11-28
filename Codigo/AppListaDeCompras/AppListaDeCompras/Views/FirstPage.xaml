@@ -3,7 +3,11 @@
     x:Class="AppListaDeCompras.Views.FirstPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels"
     Title="FirstPage">
+    <ContentPage.BindingContext>
+        <vm:FirstPageViewModel />
+    </ContentPage.BindingContext>
     <ScrollView>
         <StackLayout Padding="30">
             <Image
@@ -22,6 +26,7 @@
                 Text="Faça suas compras de forma organizadas e colaborativas"
                 VerticalOptions="CenterAndExpand" />
             <Button
+                Command="{Binding NavigateToAppShellCommand}"
                 SemanticProperties.Description="Acessa a próxima tela do app, tela de cadastro de lista de compras"
                 SemanticProperties.Hint="Acessar"
                 Text="Acessar"

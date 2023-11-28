@@ -3,13 +3,19 @@
     x:Class="AppListaDeCompras.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:AppListaDeCompras"
-    Shell.FlyoutBehavior="Disabled"
-    Title="AppListaDeCompras">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    xmlns:local="clr-namespace:AppListaDeCompras.Views"
+    Title="AppListaDeCompras"
+    Shell.FlyoutBehavior="Disabled">
+    <TabBar>
+        <ShellContent
+            Title="Listas"
+            ContentTemplate="{DataTemplate local:ListToBuyPage}"
+            Icon="icon_lista.png"
+            Route="ListToBuy" />
+        <ShellContent
+            Title="Perfil"
+            ContentTemplate="{DataTemplate local:ProfilePage}"
+            Icon="icon_perfil.png"
+            Route="Profile" />
+    </TabBar>
 </Shell>
