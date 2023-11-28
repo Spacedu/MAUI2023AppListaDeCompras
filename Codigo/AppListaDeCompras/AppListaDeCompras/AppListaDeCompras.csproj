@@ -61,6 +61,7 @@
 	  <None Remove="Resources\Fonts\Poppins-ExtraBold.ttf" />
 	  <None Remove="Resources\Fonts\Poppins-Light.ttf" />
 	  <None Remove="Resources\Fonts\Poppins-Regular.ttf" />
+	  <None Remove="Resources\Images\back.svg" />
 	  <None Remove="Resources\Images\close.svg" />
 	  <None Remove="Resources\Images\delete.svg" />
 	  <None Remove="Resources\Images\icon_lista.svg" />
