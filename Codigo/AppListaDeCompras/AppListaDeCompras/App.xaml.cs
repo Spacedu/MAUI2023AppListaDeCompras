@@ -8,7 +8,7 @@ namespace AppListaDeCompras
         {
             InitializeComponent();
 
-            MainPage = new FirstPage();
+            MainPage = VersionTracking.IsFirstLaunchEver ? new FirstPage() : new AppShell();
         }
     }
 }
