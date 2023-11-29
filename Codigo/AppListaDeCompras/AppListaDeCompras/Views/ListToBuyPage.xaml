@@ -3,7 +3,11 @@
     x:Class="AppListaDeCompras.Views.ListToBuyPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels"
     Title="ListToBuyPage">
+    <ContentPage.BindingContext>
+        <vm:ListToBuyViewModel />
+    </ContentPage.BindingContext>
     <Grid RowDefinitions="75, *">
         <StackLayout Padding="10" Orientation="Horizontal">
             <ImageButton HeightRequest="37" Source="back.png" />
@@ -13,7 +17,43 @@
                 Placeholder="Pesquisar" />
         </StackLayout>
 
-        <CollectionView Grid.Row="1">
+        <CollectionView Grid.Row="1" ItemsSource="{Binding ListToBuy}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="90, *, 80" RowDefinitions="Auto, 30">
+                        <Image
+                            Margin="15,10,0,10"
+                            HeightRequest="64"
+                            Source="my_list.png" />
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            Margin="15,0,0,0"
+                            VerticalOptions="Center">
+                            <Label Style="{StaticResource Paragraph}" Text="{Binding Name}" />
+                            <HorizontalStackLayout>
+                                <Label Style="{StaticResource SmallText}" Text="{Binding Products.Count}" />
+                                <Label Style="{StaticResource SmallText}" Text=" itens - " />
+                                <Label Style="{StaticResource SmallTextEmphasis}" Text="{Binding Users.Count}" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                        <Label
+                            Grid.Column="2"
+                            Text="R$ 55,00"
+                            VerticalOptions="Center" />
+
+                        <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="3">
+                            <Button
+                                ImageSource="share.png"
+                                Style="{StaticResource ButtonBorderless}"
+                                Text="Compartilhar" />
+                            <Button
+                                ImageSource="delete.png"
+                                Style="{StaticResource ButtonBorderless}"
+                                Text="Excluir" />
+                        </HorizontalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
             <CollectionView.EmptyView>
                 <Label
                     HorizontalOptions="CenterAndExpand"
