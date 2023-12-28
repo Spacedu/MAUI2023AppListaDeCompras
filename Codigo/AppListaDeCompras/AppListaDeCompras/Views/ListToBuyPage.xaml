@@ -10,6 +10,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:TextSharedListConverter x:Key="TextSharedListConverter" />
+            <converters:TextTotalPriceOfItensInCartConverter x:Key="TextTotalPriceOfItensInCartConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.BindingContext>
@@ -52,7 +53,7 @@
                         <Label
                             Grid.Row="0"
                             Grid.Column="2"
-                            Text="R$ 55,00"
+                            Text="{Binding ., Converter={StaticResource TextTotalPriceOfItensInCartConverter}}"
                             VerticalOptions="Center" />
                         <components:HorizontalLine
                             Grid.Row="1"

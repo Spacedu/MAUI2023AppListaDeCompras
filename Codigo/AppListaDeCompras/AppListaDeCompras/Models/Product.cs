@@ -14,5 +14,6 @@ namespace AppListaDeCompras.Models
         //TODO - Trocar para Enum
         public string QuantityUnitMeasure { get; set; }
         public decimal Price { get; set; }
+        public bool HasCaught { get; set; } = false;
     }
 }
