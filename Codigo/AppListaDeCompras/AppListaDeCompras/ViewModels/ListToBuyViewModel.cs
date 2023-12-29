@@ -1,5 +1,8 @@
 ﻿using AppListaDeCompras.Models;
+using AppListaDeCompras.Views.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Mopups.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,6 +49,13 @@ namespace AppListaDeCompras.ViewModels
                     }
                 }
             };
+        }
+
+        //TODO - Colocar parâmetro ListToBuy
+        [RelayCommand]
+        private void OpenPopupSharePage()
+        {
+            MopupService.Instance.PushAsync(new ListToBuySharePage());
         }
     }
 }
