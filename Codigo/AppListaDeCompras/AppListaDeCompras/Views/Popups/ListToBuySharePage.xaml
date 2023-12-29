@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppListaDeCompras.Views.Popups.ListToBuySharePage"
-             xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
-             Title="ListToBuySharePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Compartilhar!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AppListaDeCompras.Views.Popups.ListToBuySharePage" xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups" xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels.Popups" Title="ListToBuySharePage" BackgroundColor="#AA000000" CloseWhenBackgroundIsClicked="False">
+    <mopups:PopupPage.BindingContext>
+        <vm:ListToBuySharePageViewModel />
+    </mopups:PopupPage.BindingContext>
+    <Border StrokeThickness="0" WidthRequest="360" HeightRequest="400" BackgroundColor="White" StrokeShape="RoundRectangle 12" Padding="20">
+        <VerticalStackLayout Spacing="10">
+            <Label Text="Compartilhar!" VerticalOptions="Center" HorizontalOptions="Center" />
+            <Button Text="X" Command="{Binding CloseCommand}" />
+            <Entry Placeholder="E-mail" />
+            <Button Text="Adicionar" />
+        </VerticalStackLayout>
+    </Border>
+    
 </mopups:PopupPage>
