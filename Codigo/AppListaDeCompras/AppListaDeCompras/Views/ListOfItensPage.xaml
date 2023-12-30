@@ -4,7 +4,11 @@
              x:Class="AppListaDeCompras.Views.ListOfItensPage" 
              xmlns:components="clr-namespace:AppListaDeCompras.Libraries.Components" 
              xmlns:converters="clr-namespace:AppListaDeCompras.Libraries.Converters" 
+             xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels"
              Title="ListOfItensPage">
+    <ContentPage.BindingContext>
+        <vm:ListOfItensPageViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:TextSharedListConverter x:Key="TextSharedListConverter" />
@@ -14,35 +18,29 @@
     <Grid RowDefinitions="75, *, 1, 75">
         <StackLayout Padding="10" Orientation="Horizontal">
             <ImageButton HeightRequest="37" Source="back.png" />
-            <Entry Margin="15,0,0,0" HorizontalOptions="FillAndExpand" Placeholder="Pesquisar" />
+            <Entry Margin="15,0,0,0" HorizontalOptions="FillAndExpand" Placeholder="Pesquisar" Text="{Binding ListToBuy.Name}" />
         </StackLayout>
 
-        <CollectionView Grid.Row="1" ItemsSource="{Binding ListToBuy}">
+        <CollectionView Grid.Row="1" ItemsSource="{Binding ListToBuy.Products}">
             <CollectionView.Header>
                 <components:HorizontalLine Grid.ColumnSpan="3" Stroke="Gray" />
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="90, *, 80" RowDefinitions="Auto, 1, 30, 1">
+                    <Grid ColumnDefinitions="90, *, 80" RowDefinitions="Auto, 1">
 
-                        <Image Grid.Row="0" Margin="15,10,0,10" HeightRequest="64" Source="my_list.png" />
-                        <VerticalStackLayout Grid.Row="0" Grid.Column="1" Margin="15,0,0,0" VerticalOptions="Center">
+                        <CheckBox />
+                        <VerticalStackLayout Grid.Column="1" Margin="15,15,0,15" VerticalOptions="Center">
                             <Label Style="{StaticResource Paragraph}" Text="{Binding Name}" />
                             <HorizontalStackLayout>
-                                <Label Style="{StaticResource SmallText}" Text="{Binding Products.Count}" />
-                                <Label Style="{StaticResource SmallText}" Text=" itens" />
-                                <Label Style="{StaticResource SmallTextEmphasis}" Text="{Binding Users.Count, Converter={StaticResource TextSharedListConverter}}" />
+                                <Label Style="{StaticResource SmallText}" Text="Quantidade: " />
+                                <Label Style="{StaticResource SmallText}" Text="{Binding Quantity}" />
+                                <Label Style="{StaticResource SmallText}" Text="{Binding QuantityUnitMeasure}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
-                        <Label Grid.Row="0" Grid.Column="2" Text="{Binding ., Converter={StaticResource TextTotalPriceOfItensInCartConverter}}" VerticalOptions="Center" />
-                        <components:HorizontalLine Grid.Row="1" Grid.ColumnSpan="3" Stroke="LightGray" />
+                        <Label Grid.Column="2" Text="{Binding Price}" VerticalOptions="Center" />
 
-                        <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="3">
-                            <Button ImageSource="share.png" Style="{StaticResource ButtonBorderless}" Text="Compartilhar" Command="{Binding OpenPopupSharePageCommand, Source={x:Reference vm}}" CommandParameter="{Binding .}" />
-                            <Button ImageSource="delete.png" Style="{StaticResource ButtonBorderless}" Text="Excluir" />
-                        </HorizontalStackLayout>
-
-                        <components:HorizontalLine Grid.Row="3" Grid.ColumnSpan="3" Stroke="Gray" />
+                        <components:HorizontalLine Grid.Row="1" Grid.ColumnSpan="3" Stroke="Gray" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
