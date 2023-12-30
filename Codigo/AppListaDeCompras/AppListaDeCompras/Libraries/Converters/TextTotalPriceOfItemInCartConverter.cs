@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace AppListaDeCompras.Libraries.Converters
 {
-    public class TextTotalPriceOfItemInCartConverter : IValueConverter
+    public class TextTotalPriceOfItemInCartConverter : IMultiValueConverter
     {
-        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var product = value as Product;
+            var product = values[0] as Product;
 
-            if(product == null)
+            if (product == null)
             {
                 return "R$ 0,00";
             }
@@ -25,7 +25,7 @@ namespace AppListaDeCompras.Libraries.Converters
             }
             else
             {
-                if(product.Price > 0)
+                if (product.Price > 0)
                 {
                     return product.Price.ToString("C") + " " + product.QuantityUnitMeasure;
                 }
@@ -33,7 +33,8 @@ namespace AppListaDeCompras.Libraries.Converters
             return "R$ 0,00";
         }
 
-        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

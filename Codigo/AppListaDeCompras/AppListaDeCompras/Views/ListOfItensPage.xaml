@@ -50,7 +50,14 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                            <Label Text="{Binding ., Converter={StaticResource TextTotalPriceOfItemInCartConverter}}" Style="{StaticResource SubHeadline}" HorizontalOptions="Start" VerticalOptions="Center" />
+                            <Label Style="{StaticResource SubHeadline}" HorizontalOptions="Start" VerticalOptions="Center">
+                                <Label.Text>
+                                    <MultiBinding Converter="{StaticResource TextTotalPriceOfItemInCartConverter}">
+                                        <Binding Path="." />
+                                        <Binding Path="HasCaught" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
                         </VerticalStackLayout>
                         
 
