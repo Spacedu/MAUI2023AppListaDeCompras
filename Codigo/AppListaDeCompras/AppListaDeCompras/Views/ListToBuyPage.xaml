@@ -63,7 +63,7 @@
                         <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="3">
                             <Button
                                 ImageSource="share.png"
-                                Style="{StaticResource ButtonBorderless}" Text="Compartilhar" Command="{Binding OpenPopupSharePageCommand, Source={x:Reference vm}}"/>
+                                Style="{StaticResource ButtonBorderless}" Text="Compartilhar" Command="{Binding OpenPopupSharePageCommand, Source={x:Reference vm}}" CommandParameter="{Binding .}"/>
                             <Button
                                 ImageSource="delete.png"
                                 Style="{StaticResource ButtonBorderless}"

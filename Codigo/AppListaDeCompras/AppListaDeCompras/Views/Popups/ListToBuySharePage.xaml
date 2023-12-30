@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AppListaDeCompras.Views.Popups.ListToBuySharePage" xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups" xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels.Popups" Title="ListToBuySharePage" BackgroundColor="#AA000000" CloseWhenBackgroundIsClicked="False">
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:components="clr-namespace:AppListaDeCompras.Libraries.Components" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AppListaDeCompras.Views.Popups.ListToBuySharePage" xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups" xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels.Popups" Title="ListToBuySharePage" BackgroundColor="#AA000000" CloseWhenBackgroundIsClicked="False">
     <mopups:PopupPage.BindingContext>
         <vm:ListToBuySharePageViewModel />
     </mopups:PopupPage.BindingContext>
     <Border StrokeThickness="0" WidthRequest="360" HeightRequest="400" BackgroundColor="White" StrokeShape="RoundRectangle 12" Padding="20">
         <VerticalStackLayout Spacing="10">
-            <Label Text="Compartilhar!" VerticalOptions="Center" HorizontalOptions="Center" />
-            <Button Text="X" Command="{Binding CloseCommand}" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Compartilhar" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
+                <ImageButton Source="close.png" Command="{Binding CloseCommand}" />
+            </StackLayout>
+            
             <Entry Placeholder="E-mail" />
             <Button Text="Adicionar" />
+            <CollectionView ItemsSource="{Binding List.Users}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <components:HorizontalLine Stroke="Gray" />
+                            <Label Text="{Binding Name}" />
+                            <Label Text="{Binding Email}" />
+                        </VerticalStackLayout>                        
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </VerticalStackLayout>
     </Border>
     
