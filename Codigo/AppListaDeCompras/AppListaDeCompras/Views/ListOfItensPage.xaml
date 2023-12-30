@@ -22,7 +22,7 @@
     </ContentPage.Resources>
     <Grid RowDefinitions="75, 60, *, 1, 60">
         <StackLayout Padding="10" Orientation="Horizontal">
-            <ImageButton HeightRequest="37" Source="back.png" />
+            <ImageButton HeightRequest="37" Source="back.png" Command="{Binding BackPageCommand}" />
             <Entry Margin="15,0,0,0" HorizontalOptions="FillAndExpand" Placeholder="Pesquisar" Text="{Binding ListToBuy.Name}" />
         </StackLayout>
         <Label Text="ITENS" VerticalOptions="Center" HorizontalTextAlignment="Center" Style="{StaticResource SmallHeadline}" Grid.Row="1" />

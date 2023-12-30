@@ -24,5 +24,11 @@ namespace AppListaDeCompras.ViewModels
         {
             OnPropertyChanged(nameof(ListToBuy));
         }
+
+        [RelayCommand]
+        private void BackPage()
+        {
+            Shell.Current.GoToAsync("..");
+        }
     }
 }
