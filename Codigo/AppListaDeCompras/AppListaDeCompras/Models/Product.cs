@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using AppListaDeCompras.Models.Enums;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,8 @@ namespace AppListaDeCompras.Models
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public int Quantity { get; set; }
-        //TODO - Trocar para Enum
-        public string QuantityUnitMeasure { get; set; }
+        public decimal Quantity { get; set; }
+        public UnitMeasure QuantityUnitMeasure { get; set; }
         public decimal Price { get; set; }
         [ObservableProperty]
         private bool hasCaught = false;
