@@ -15,19 +15,19 @@
             <converters:TextTotalPriceOfItensInCartConverter x:Key="TextTotalPriceOfItensInCartConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid RowDefinitions="75, *, 1, 60">
+    <Grid RowDefinitions="75, 60, *, 1, 60">
         <StackLayout Padding="10" Orientation="Horizontal">
             <ImageButton HeightRequest="37" Source="back.png" />
             <Entry Margin="15,0,0,0" HorizontalOptions="FillAndExpand" Placeholder="Pesquisar" Text="{Binding ListToBuy.Name}" />
         </StackLayout>
-
-        <CollectionView Grid.Row="1" ItemsSource="{Binding ListToBuy.Products}">
+        <Label Text="ITENS" VerticalOptions="Center" HorizontalTextAlignment="Center" Style="{StaticResource SmallHeadline}" Grid.Row="1" />
+        <CollectionView Grid.Row="2" ItemsSource="{Binding ListToBuy.Products}">
             <CollectionView.Header>
                 <components:HorizontalLine Grid.ColumnSpan="3" Stroke="Gray" />
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="60, *, 80" RowDefinitions="Auto, 1">
+                    <Grid ColumnDefinitions="60, *, 100" RowDefinitions="Auto, 1">
 
                         <CheckBox HorizontalOptions="End"/>
                         <VerticalStackLayout Grid.Column="1" Margin="15,15,0,15" VerticalOptions="Center">
@@ -49,7 +49,7 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                            <Label Text="{Binding Price}" VerticalOptions="Center" />
+                            <Label Text="{Binding Price, StringFormat='{0:C}'}" Style="{StaticResource SubHeadline}" HorizontalOptions="Start" VerticalOptions="Center" />
                         </VerticalStackLayout>
                         
 
@@ -62,22 +62,29 @@
             </CollectionView.EmptyView>
         </CollectionView>
 
-        <Button Grid.Row="1" Margin="20" HorizontalOptions="End" Text="+" VerticalOptions="End" />
+        <Button Grid.Row="2" Margin="20" HorizontalOptions="End" Text="+" VerticalOptions="End" />
 
-        <components:HorizontalLine Grid.Row="2" Stroke="LightGray" />
+        <components:HorizontalLine Grid.Row="3" Stroke="LightGray" />
 
-        <Grid Grid.Row="3" ColumnDefinitions="*,*,*">
+        <Grid Grid.Row="4" ColumnDefinitions="*,*,*">
             <VerticalStackLayout Margin="12, 0, 0, 0" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0">
-                <Label Text="Lista (0 itens)" />
-                <Label Text="Falta 0 item" />
+                <Label Text="Lista (0 itens)">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Lista" Style="{StaticResource Paragraph}" />
+                            <Span Text=" (0 itens)" Style="{StaticResource SmallText}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Text="Falta 0 item" Style="{StaticResource SmallText}"  />
             </VerticalStackLayout>
             <VerticalStackLayout VerticalOptions="Center" Grid.Column="1">
-                <Label Text="Carrinho " HorizontalTextAlignment="Center" />
-                <Label Text="0 itens" HorizontalTextAlignment="Center"  />
+                <Label Text="Carrinho " HorizontalTextAlignment="Center" Style="{StaticResource Paragraph}" />
+                <Label Text="0 itens" HorizontalTextAlignment="Center" Style="{StaticResource SmallText}" />
             </VerticalStackLayout>
             <VerticalStackLayout Margin="0, 0, 12, 0" VerticalOptions="Center" HorizontalOptions="End" Grid.Column="2">
-                <Label Text="Total" HorizontalTextAlignment="End" />
-                <Label Text="R$ 0,00" />
+                <Label Text="Total" HorizontalTextAlignment="End" Style="{StaticResource SubHeadline}" />
+                <Label Text="R$ 0,00" Style="{StaticResource SmallTextEmphasis}" />
             </VerticalStackLayout>
         </Grid>
     </Grid>

@@ -29,7 +29,7 @@ namespace AppListaDeCompras.ViewModels
                     },
                     Products = new List<Product>()
                     {
-                        new Product { Name = "Arroz 5Kg", Quantity = 2, Price = 28.99m, HasCaught = true },
+                        new Product { Name = "Arroz 5Kg", Quantity = 10, Price = 28.99m, HasCaught = true },
                         new Product { Name = "Feijão 1Kg", Quantity = 3, Price = 7.49m, HasCaught = true },
                         new Product { Name = "Leite condensado", Quantity = 1, Price = 6.29m }
                     }
