@@ -34,7 +34,7 @@
                                     <Label Style="{StaticResource SmallTextEmphasis}" Text="{Binding Users.Count, Converter={StaticResource TextSharedListConverter}}" />
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
-                            <Label Grid.Row="0" Grid.Column="2" Text="{Binding ., Converter={StaticResource TextTotalPriceOfItensInCartConverter}}" VerticalOptions="Center" />
+                            <Label Grid.Row="0" Grid.Column="2" Text="{Binding Products, Converter={StaticResource TextTotalPriceOfItensInCartConverter}}" VerticalOptions="Center" />
                         </Grid>
                         <components:HorizontalLine Stroke="LightGray" />
 

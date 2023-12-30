@@ -12,17 +12,17 @@ namespace AppListaDeCompras.Libraries.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            ListToBuy? listToBuy = value as ListToBuy;
+            List<Product>? listOfProducts = value as List<Product>;
 
-            if (listToBuy is null)
+            if (listOfProducts is null)
                 return "R$ 0,00";
 
-            if (listToBuy.Products.Count == 0)
+            if (listOfProducts.Count == 0)
                 return "R$ 0,00";
 
             decimal totalPrice = 0;
 
-            foreach (var product in listToBuy.Products)
+            foreach (var product in listOfProducts)
             {
                 if(product.HasCaught)
                     totalPrice += product.Price * product.Quantity;

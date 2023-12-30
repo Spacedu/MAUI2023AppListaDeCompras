@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppListaDeCompras.Views.ListOfItensPage" 
-             xmlns:components="clr-namespace:AppListaDeCompras.Libraries.Components" 
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" xmlns:components="clr-namespace:AppListaDeCompras.Libraries.Components" 
              xmlns:converters="clr-namespace:AppListaDeCompras.Libraries.Converters" 
              xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels"
              Title="ListOfItensPage">
     <ContentPage.BindingContext>
-        <vm:ListOfItensPageViewModel />
+        <vm:ListOfItensPageViewModel x:Name="vm" />
     </ContentPage.BindingContext>
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -34,7 +34,11 @@
                 <DataTemplate>
                     <Grid ColumnDefinitions="60, *, 100" RowDefinitions="Auto, 1">
 
-                        <CheckBox HorizontalOptions="End" IsChecked="{Binding HasCaught}"/>
+                        <CheckBox HorizontalOptions="End" IsChecked="{Binding HasCaught}">
+                            <CheckBox.Behaviors>
+                                <toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding UpdateListToBuyCommand, Source={x:Reference vm}}" />
+                            </CheckBox.Behaviors>
+                        </CheckBox>
                         <VerticalStackLayout Grid.Column="1" Margin="15,15,0,15" VerticalOptions="Center">
                             <Label Style="{StaticResource Paragraph}" Text="{Binding Name}" />
                             <HorizontalStackLayout>
@@ -102,7 +106,7 @@
             </VerticalStackLayout>
             <VerticalStackLayout Margin="0, 0, 12, 0" VerticalOptions="Center" HorizontalOptions="End" Grid.Column="2">
                 <Label Text="Total" HorizontalTextAlignment="End" Style="{StaticResource SubHeadline}" />
-                <Label Text="{Binding ListToBuy, Converter={StaticResource TextTotalPriceOfItensInCartConverter}}" Style="{StaticResource SmallTextEmphasis}" />
+                <Label Text="{Binding ListToBuy.Products, Converter={StaticResource TextTotalPriceOfItensInCartConverter}}" Style="{StaticResource SmallTextEmphasis}" />
             </VerticalStackLayout>
         </Grid>
     </Grid>
