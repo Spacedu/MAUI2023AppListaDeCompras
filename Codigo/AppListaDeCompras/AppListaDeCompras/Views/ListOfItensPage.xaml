@@ -14,6 +14,7 @@
             <converters:TextSharedListConverter x:Key="TextSharedListConverter" />
             <converters:TextTotalPriceOfItensInCartConverter x:Key="TextTotalPriceOfItensInCartConverter" />
             <converters:TextTotalPriceOfItemInCartConverter x:Key="TextTotalPriceOfItemInCartConverter" />
+            <converters:ColorTotalPriceOfItensInCartConverter x:Key="ColorTotalPriceOfItensInCartConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid RowDefinitions="75, 60, *, 1, 60">
@@ -50,8 +51,8 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                            <Label Style="{StaticResource SubHeadline}" HorizontalOptions="Start" VerticalOptions="Center">
-                                <Label.Text>
+                            <Label Style="{StaticResource SubHeadline}" HorizontalOptions="Start" VerticalOptions="Center" TextColor="{Binding HasCaught, Converter={StaticResource ColorTotalPriceOfItensInCartConverter}}">
+                                <Label.Text >
                                     <MultiBinding Converter="{StaticResource TextTotalPriceOfItemInCartConverter}">
                                         <Binding Path="." />
                                         <Binding Path="HasCaught" />
