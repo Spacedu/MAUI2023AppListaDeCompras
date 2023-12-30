@@ -24,7 +24,6 @@ namespace AppListaDeCompras.Libraries.Converters
 
             foreach (var product in listToBuy.Products)
             {
-                //TODO - Impacto: QuantityUnitMeasure...
                 if(product.HasCaught)
                     totalPrice += product.Price * product.Quantity;
             }

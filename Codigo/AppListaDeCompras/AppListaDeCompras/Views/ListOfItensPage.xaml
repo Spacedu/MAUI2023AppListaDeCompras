@@ -15,6 +15,9 @@
             <converters:TextTotalPriceOfItensInCartConverter x:Key="TextTotalPriceOfItensInCartConverter" />
             <converters:TextTotalPriceOfItemInCartConverter x:Key="TextTotalPriceOfItemInCartConverter" />
             <converters:ColorTotalPriceOfItensInCartConverter x:Key="ColorTotalPriceOfItensInCartConverter" />
+            <converters:TextQuantityItemOfListConverter x:Key="TextQuantityItemOfListConverter" />
+            <converters:TextQuantityOfItensNotCaughtConverter x:Key="TextQuantityOfItensNotCaughtConverter" />
+            <converters:TextQuantityOfItensCaughtConverter x:Key="TextQuantityOfItensCaughtConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid RowDefinitions="75, 60, *, 1, 60">
@@ -80,20 +83,26 @@
                 <Label Text="Lista (0 itens)">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Lista" Style="{StaticResource Paragraph}" />
-                            <Span Text=" (0 itens)" Style="{StaticResource SmallText}" />
+                            <Span Text="Lista " Style="{StaticResource Paragraph}" />
+                            <Span Text="(" Style="{StaticResource SmallText}" />
+                            <Span Text="{Binding ListToBuy.Products.Count}" Style="{StaticResource SmallText}" />
+                            <Span Text=" " Style="{StaticResource SmallText}" />
+                            <Span Text="{Binding ListToBuy.Products.Count, Converter={StaticResource TextQuantityItemOfListConverter}}" Style="{StaticResource SmallText}" />
+                            <Span Text=")" Style="{StaticResource SmallText}" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Label Text="Falta 0 item" Style="{StaticResource SmallText}"  />
+                <Label Style="{StaticResource SmallText}" Text="{Binding ListToBuy.Products, Converter={StaticResource TextQuantityOfItensNotCaughtConverter}}">
+                    
+                </Label>
             </VerticalStackLayout>
             <VerticalStackLayout VerticalOptions="Center" Grid.Column="1">
                 <Label Text="Carrinho " HorizontalTextAlignment="Center" Style="{StaticResource Paragraph}" />
-                <Label Text="0 itens" HorizontalTextAlignment="Center" Style="{StaticResource SmallText}" />
+                <Label Text="{Binding ListToBuy.Products, Converter={StaticResource TextQuantityOfItensCaughtConverter}}" HorizontalTextAlignment="Center" Style="{StaticResource SmallText}" />
             </VerticalStackLayout>
             <VerticalStackLayout Margin="0, 0, 12, 0" VerticalOptions="Center" HorizontalOptions="End" Grid.Column="2">
                 <Label Text="Total" HorizontalTextAlignment="End" Style="{StaticResource SubHeadline}" />
-                <Label Text="R$ 0,00" Style="{StaticResource SmallTextEmphasis}" />
+                <Label Text="{Binding ListToBuy, Converter={StaticResource TextTotalPriceOfItensInCartConverter}}" Style="{StaticResource SmallTextEmphasis}" />
             </VerticalStackLayout>
         </Grid>
     </Grid>
