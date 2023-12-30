@@ -13,6 +13,7 @@
         <ResourceDictionary>
             <converters:TextSharedListConverter x:Key="TextSharedListConverter" />
             <converters:TextTotalPriceOfItensInCartConverter x:Key="TextTotalPriceOfItensInCartConverter" />
+            <converters:TextTotalPriceOfItemInCartConverter x:Key="TextTotalPriceOfItemInCartConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid RowDefinitions="75, 60, *, 1, 60">
@@ -49,7 +50,7 @@
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-                            <Label Text="{Binding Price, StringFormat='{0:C}'}" Style="{StaticResource SubHeadline}" HorizontalOptions="Start" VerticalOptions="Center" />
+                            <Label Text="{Binding ., Converter={StaticResource TextTotalPriceOfItemInCartConverter}}" Style="{StaticResource SubHeadline}" HorizontalOptions="Start" VerticalOptions="Center" />
                         </VerticalStackLayout>
                         
 
