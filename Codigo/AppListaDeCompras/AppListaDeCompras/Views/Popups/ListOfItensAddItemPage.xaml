@@ -34,7 +34,10 @@
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Quantidade"
                     Text="{Binding Product.Quantity}" />
-                <Picker HorizontalOptions="FillAndExpand" SelectedItem="{Binding Product.QuantityUnitMeasure}" />
+                <Picker
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding UnitsMeasure}"
+                    SelectedItem="{Binding Product.QuantityUnitMeasure}" />
             </StackLayout>
             <Entry Placeholder="Preço" Text="{Binding Product.Price}" />
 

@@ -1,4 +1,5 @@
 ﻿using AppListaDeCompras.Models;
+using AppListaDeCompras.Models.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mopups.Services;
@@ -15,6 +16,13 @@ namespace AppListaDeCompras.ViewModels.Popups
         [ObservableProperty]
         private Product? product;
 
+        [ObservableProperty]
+        private string[] unitsMeasure;
+
+        public ListOfItemAddItemPageViewModel()
+        {
+            unitsMeasure = Enum.GetNames(typeof(UnitMeasure));
+        }
         [RelayCommand]
         private void Close()
         {
