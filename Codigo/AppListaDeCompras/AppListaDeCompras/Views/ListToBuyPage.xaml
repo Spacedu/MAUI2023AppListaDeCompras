@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage x:Class="AppListaDeCompras.Views.ListToBuyPage" xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:components="clr-namespace:AppListaDeCompras.Libraries.Components" xmlns:converters="clr-namespace:AppListaDeCompras.Libraries.Converters" xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels" Title="ListToBuyPage">
+<ContentPage
+    x:Class="AppListaDeCompras.Views.ListToBuyPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:AppListaDeCompras.Libraries.Components"
+    xmlns:converters="clr-namespace:AppListaDeCompras.Libraries.Converters"
+    xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels"
+    Title="ListToBuyPage">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:TextSharedListConverter x:Key="TextSharedListConverter" />
@@ -25,8 +32,16 @@
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding OpenListOfItensPageCommand, Source={x:Reference vm}}" CommandParameter="{Binding .}" />
                             </Grid.GestureRecognizers>
-                            <Image Grid.Row="0" Margin="15,10,0,10" HeightRequest="64" Source="my_list.png" />
-                            <VerticalStackLayout Grid.Row="0" Grid.Column="1" Margin="15,0,0,0" VerticalOptions="Center">
+                            <Image
+                                Grid.Row="0"
+                                Margin="15,10,0,10"
+                                HeightRequest="64"
+                                Source="my_list.png" />
+                            <VerticalStackLayout
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="15,0,0,0"
+                                VerticalOptions="Center">
                                 <Label Style="{StaticResource Paragraph}" Text="{Binding Name}" />
                                 <HorizontalStackLayout>
                                     <Label Style="{StaticResource SmallText}" Text="{Binding Products.Count}" />
@@ -34,13 +49,25 @@
                                     <Label Style="{StaticResource SmallTextEmphasis}" Text="{Binding Users.Count, Converter={StaticResource TextSharedListConverter}}" />
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
-                            <Label Grid.Row="0" Grid.Column="2" Text="{Binding Products, Converter={StaticResource TextTotalPriceOfItensInCartConverter}}" VerticalOptions="Center" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="2"
+                                Text="{Binding Products, Converter={StaticResource TextTotalPriceOfItensInCartConverter}}"
+                                VerticalOptions="Center" />
                         </Grid>
                         <components:HorizontalLine Stroke="LightGray" />
 
                         <HorizontalStackLayout>
-                            <Button ImageSource="share.png" Style="{StaticResource ButtonBorderless}" Text="Compartilhar" Command="{Binding OpenPopupSharePageCommand, Source={x:Reference vm}}" CommandParameter="{Binding .}" />
-                            <Button ImageSource="delete.png" Style="{StaticResource ButtonBorderless}" Text="Excluir" />
+                            <Button
+                                Command="{Binding OpenPopupSharePageCommand, Source={x:Reference vm}}"
+                                CommandParameter="{Binding .}"
+                                ImageSource="share.png"
+                                Style="{StaticResource ButtonBorderless}"
+                                Text="Compartilhar" />
+                            <Button
+                                ImageSource="delete.png"
+                                Style="{StaticResource ButtonBorderless}"
+                                Text="Excluir" />
                         </HorizontalStackLayout>
 
                         <components:HorizontalLine Stroke="Gray" />
@@ -48,11 +75,20 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             <CollectionView.EmptyView>
-                <Label HorizontalOptions="CenterAndExpand" Style="{StaticResource Paragraph}" Text="Nenhuma lista de compras" VerticalOptions="CenterAndExpand" />
+                <Label
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource Paragraph}"
+                    Text="Nenhuma lista de compras"
+                    VerticalOptions="CenterAndExpand" />
             </CollectionView.EmptyView>
         </CollectionView>
 
 
-        <Button Grid.Row="1" Margin="20" HorizontalOptions="End" Text="+" VerticalOptions="End" />
+        <Button
+            Grid.Row="1"
+            Margin="20"
+            HorizontalOptions="End"
+            Text="+"
+            VerticalOptions="End" />
     </Grid>
 </ContentPage>

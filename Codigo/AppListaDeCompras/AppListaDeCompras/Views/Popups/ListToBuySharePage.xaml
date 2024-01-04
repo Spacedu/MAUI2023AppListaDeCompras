@@ -1,32 +1,57 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:components="clr-namespace:AppListaDeCompras.Libraries.Components" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AppListaDeCompras.Views.Popups.ListToBuySharePage" xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups" xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels.Popups" Title="ListToBuySharePage" BackgroundColor="#AA000000" CloseWhenBackgroundIsClicked="False">
+<mopups:PopupPage
+    x:Class="AppListaDeCompras.Views.Popups.ListToBuySharePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:AppListaDeCompras.Libraries.Components"
+    xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+    xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels.Popups"
+    Title="ListToBuySharePage"
+    BackgroundColor="#AA000000"
+    CloseWhenBackgroundIsClicked="False">
     <mopups:PopupPage.BindingContext>
         <vm:ListToBuySharePageViewModel />
     </mopups:PopupPage.BindingContext>
-    <Border StrokeThickness="0" WidthRequest="360" HeightRequest="400" BackgroundColor="White" StrokeShape="RoundRectangle 12">
+    <Border
+        BackgroundColor="White"
+        HeightRequest="400"
+        StrokeShape="RoundRectangle 12"
+        StrokeThickness="0"
+        WidthRequest="360">
         <VerticalStackLayout>
             <VerticalStackLayout Padding="20" Spacing="10">
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Compartilhar" Margin="30, 0, 0, 0" Style="{StaticResource SmallHeadline}" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
-                    <ImageButton Source="close.png" Command="{Binding CloseCommand}" />
+                    <Label
+                        Margin="30,0,0,0"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource SmallHeadline}"
+                        Text="Compartilhar"
+                        VerticalOptions="Center" />
+                    <ImageButton Command="{Binding CloseCommand}" Source="close.png" />
                 </StackLayout>
-            
+
                 <Entry Placeholder="E-mail" />
                 <Button Text="Adicionar" />
             </VerticalStackLayout>
-            
+
             <CollectionView ItemsSource="{Binding List.Users}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout>
-                            <components:HorizontalLine Stroke="LightGray" Margin="0, 15" />
-                            <Label Text="{Binding Name}" Padding="20, 0" Style="{StaticResource Paragraph}" />
-                            <Label Text="{Binding Email}" Padding="20, 0" Style="{StaticResource SmallText}" />
-                        </VerticalStackLayout>                        
+                            <components:HorizontalLine Margin="0,15" Stroke="LightGray" />
+                            <Label
+                                Padding="20,0"
+                                Style="{StaticResource Paragraph}"
+                                Text="{Binding Name}" />
+                            <Label
+                                Padding="20,0"
+                                Style="{StaticResource SmallText}"
+                                Text="{Binding Email}" />
+                        </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </VerticalStackLayout>
     </Border>
-    
+
 </mopups:PopupPage>

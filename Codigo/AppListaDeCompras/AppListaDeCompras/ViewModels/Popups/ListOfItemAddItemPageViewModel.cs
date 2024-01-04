@@ -1,5 +1,7 @@
 ﻿using AppListaDeCompras.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Mopups.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +14,17 @@ namespace AppListaDeCompras.ViewModels.Popups
     {
         [ObservableProperty]
         private Product? product;
+
+        [RelayCommand]
+        private void Close()
+        {
+            MopupService.Instance.PopAsync();
+        }
+
+        [RelayCommand]
+        private void Save()
+        {
+
+        }
     }
 }
