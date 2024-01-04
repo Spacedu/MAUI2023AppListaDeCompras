@@ -78,7 +78,7 @@
             </CollectionView.EmptyView>
         </CollectionView>
 
-        <Button Grid.Row="2" Style="{StaticResource ButtonTransparent}" Margin="20" HorizontalOptions="End" Text="+" VerticalOptions="End" />
+        <Button Grid.Row="2" Style="{StaticResource ButtonTransparent}" Margin="20" HorizontalOptions="End" Text="+" VerticalOptions="End" Command="{Binding OpenPopupAddItemPageCommand}" />
 
         <components:HorizontalLine Grid.Row="3" Stroke="LightGray" />
 

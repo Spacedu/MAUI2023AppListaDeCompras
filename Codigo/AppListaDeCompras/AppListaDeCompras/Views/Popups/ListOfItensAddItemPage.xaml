@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mopups:PopupPage
+    xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels.Popups"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AppListaDeCompras.Views.Popups.ListOfItensAddItemPage" xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups" Title="ListOfItensAddItemPage" BackgroundColor="#AA000000" CloseWhenBackgroundIsClicked="False">
+    <mopups:PopupPage.BindingContext>
+        <vm:ListOfItemAddItemPageViewModel />
+    </mopups:PopupPage.BindingContext>
+    <Border StrokeThickness="0" WidthRequest="360" HeightRequest="400" BackgroundColor="White" StrokeShape="RoundRectangle 12">
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Item" Margin="30, 0, 0, 0" Style="{StaticResource SmallHeadline}" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
+                <ImageButton Source="close.png" Command="{Binding CloseCommand}" />
+            </StackLayout>
+
+            <Entry Placeholder="Nome do item" />
+            <StackLayout Orientation="Horizontal">
+                <Entry Placeholder="Quantidade" />
+                <Entry Placeholder="Kg/Un" />
+            </StackLayout>
+            <Entry Placeholder="Preço" />
+            
+            <Button Text="Salvar" />
+        </VerticalStackLayout>
+    </Border>
+</mopups:PopupPage>
