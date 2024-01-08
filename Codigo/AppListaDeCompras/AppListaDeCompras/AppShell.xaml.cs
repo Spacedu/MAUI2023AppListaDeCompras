@@ -9,6 +9,7 @@ namespace AppListaDeCompras
             InitializeComponent();
 
             Routing.RegisterRoute("ListToBuy/ListOfItens", typeof(ListOfItensPage));
+            Routing.RegisterRoute("Profile/AccessCode", typeof(AccessCodePage));
         }
     }
 }
