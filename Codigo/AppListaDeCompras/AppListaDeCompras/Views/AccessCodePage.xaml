@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppListaDeCompras.Views.AccessCodePage"
-             Title="AccessCodePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    x:Class="AppListaDeCompras.Views.AccessCodePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels"
+    Title="AccessCodePage">
+    <ContentPage.BindingContext>
+        <vm:AccessCodePageViewModel />
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <StackLayout Padding="30">
+            <Image
+                HeightRequest="{OnPlatform Default=330,
+                                           Android=290}"
+                SemanticProperties.Description="Imagem de carrinho cheio de produtos"
+                Source="image_password.png" />
+            <Label
+                SemanticProperties.HeadingLevel="Level1"
+                Style="{StaticResource Headline}"
+                Text="Acesso"
+                VerticalOptions="CenterAndExpand" />
+            <Label
+                SemanticProperties.HeadingLevel="Level2"
+                Style="{StaticResource SubHeadline}"
+                Text="Enviamos um código para o seu e-mail,&#10;informe ele abaixo"
+                VerticalOptions="CenterAndExpand" />
+            <Entry
+                Placeholder="Código de acesso"
+                Text="{Binding User.AccessCodeTemp}"
+                VerticalOptions="EndAndExpand" />
+            <Button
+                Command="{Binding NavigateToAppShellCommand}"
+                SemanticProperties.Description="Acessa a próxima tela do app, tela de cadastro de lista de compras"
+                SemanticProperties.Hint="Acessar"
+                Text="Confirmar" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
