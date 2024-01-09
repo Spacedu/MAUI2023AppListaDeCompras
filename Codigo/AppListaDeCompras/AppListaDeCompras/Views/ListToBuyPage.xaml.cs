@@ -1,3 +1,5 @@
+using AppListaDeCompras.Libraries.Services;
+
 namespace AppListaDeCompras.Views;
 
 public partial class ListToBuyPage : ContentPage
@@ -6,4 +8,10 @@ public partial class ListToBuyPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    protected async override void OnAppearing()
+    {
+        await MongoDBAtlasService.Init();
+        await MongoDBAtlasService.LoginAsync();
+    }
 }

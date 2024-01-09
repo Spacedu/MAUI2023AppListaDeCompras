@@ -23,7 +23,7 @@ namespace AppListaDeCompras.Libraries.Services
                 return;
             }
 
-            using Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync("Resources/Configs/MongoDBAltasConfig.json");
+            using Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync("MongoDBAltasConfig.json");
             using StreamReader reader = new(fileStream);
             var fileContent = await reader.ReadToEndAsync();
 
@@ -78,6 +78,17 @@ namespace AppListaDeCompras.Libraries.Services
             //This will populate the initial set of subscriptions the first time the realm is opened
             using var realm = GetRealm();
             await realm.Subscriptions.WaitForSynchronizationAsync();
+        }
+
+        public static async Task LoginAsync()
+        {
+            var user = await app.LogInAsync(Credentials.Anonymous());
+
+            if(user != null)
+            {
+                using var realm = GetRealm();
+                await realm.Subscriptions.WaitForSynchronizationAsync();
+            }
         }
 
         public static async Task LogoutAsync()

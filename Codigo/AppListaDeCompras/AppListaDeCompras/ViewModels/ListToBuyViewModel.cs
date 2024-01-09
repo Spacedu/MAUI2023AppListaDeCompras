@@ -17,7 +17,7 @@ namespace AppListaDeCompras.ViewModels
         [ObservableProperty]
         private ObservableCollection<ListToBuy> _listToBuy;
         public ListToBuyViewModel() {
-            ListToBuy = new ObservableCollection<ListToBuy>()
+            /*ListToBuy = new ObservableCollection<ListToBuy>()
             {
                 new ListToBuy()
                 {
@@ -50,7 +50,7 @@ namespace AppListaDeCompras.ViewModels
                         new Product { Name = "Leite condensado", Quantity = 1, Price = 6.29m, HasCaught = true }
                     }
                 }
-            };
+            };*/
         }
 
         [RelayCommand]
