@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Realms;
 using Realms.Sync;
@@ -82,7 +83,9 @@ namespace AppListaDeCompras.Libraries.Services
 
         public static async Task LoginAsync()
         {
-            var user = await app.LogInAsync(Credentials.Anonymous());
+            User user = CurrentUser;
+            if(CurrentUser == null)
+                user = await app.LogInAsync(Credentials.Anonymous());
 
             if(user != null)
             {
