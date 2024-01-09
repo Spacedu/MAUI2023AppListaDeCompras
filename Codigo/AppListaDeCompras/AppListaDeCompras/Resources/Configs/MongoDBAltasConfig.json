@@ -1,0 +1,9 @@
+{
+    "appId": "application-0-jlggf",
+    "appUrl": "https://realm.mongodb.com/groups/659d63780219d016130a26a5/apps/659d644191a60a607073d0d7",
+    "baseUrl": "https://realm.mongodb.com",
+    "clientApiBaseUrl": "https://sa-east-1.aws.realm.mongodb.com",
+    "dataApiBaseUrl": "https://sa-east-1.aws.data.mongodb-api.com",
+    "dataExplorerLink": "https://cloud.mongodb.com/links/659d63780219d016130a26a5/explorer/Cluster0/database/collection/find",
+    "dataSourceName": "mongodb-atlas"
+}
