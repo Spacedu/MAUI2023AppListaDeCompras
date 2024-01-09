@@ -9,7 +9,7 @@
         <vm:AccessCodePageViewModel />
     </ContentPage.BindingContext>
     <ScrollView>
-        <StackLayout Padding="30">
+        <StackLayout Padding="30" Spacing="20">
             <Image
                 HeightRequest="{OnPlatform Default=330,
                                            Android=290}"
@@ -19,18 +19,17 @@
                 SemanticProperties.HeadingLevel="Level1"
                 Style="{StaticResource Headline}"
                 Text="Acesso"
-                VerticalOptions="CenterAndExpand" />
+                VerticalOptions="EndAndExpand" />
             <Label
                 SemanticProperties.HeadingLevel="Level2"
                 Style="{StaticResource SubHeadline}"
-                Text="Enviamos um código para o seu e-mail,&#10;informe ele abaixo"
-                VerticalOptions="CenterAndExpand" />
+                Text="Enviamos um código para o seu e-mail,&#10;informe ele abaixo" />
             <Entry
                 Placeholder="Código de acesso"
                 Text="{Binding User.AccessCodeTemp}"
                 VerticalOptions="EndAndExpand" />
             <Button
-                Command="{Binding NavigateToAppShellCommand}"
+                Command="{Binding }"
                 SemanticProperties.Description="Acessa a próxima tela do app, tela de cadastro de lista de compras"
                 SemanticProperties.Hint="Acessar"
                 Text="Confirmar" />
