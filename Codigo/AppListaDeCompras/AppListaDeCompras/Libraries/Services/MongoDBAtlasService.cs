@@ -2,7 +2,7 @@ using System.Text.Json;
 using Realms;
 using Realms.Sync;
 
-namespace RealmTodo.Services
+namespace AppListaDeCompras.Libraries.Services
 {
     public static class MongoDBAtlasService
     {
@@ -23,7 +23,7 @@ namespace RealmTodo.Services
                 return;
             }
 
-            using Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync("MongoDBAltasConfig.json");
+            using Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync("Resources/Configs/MongoDBAltasConfig.json");
             using StreamReader reader = new(fileStream);
             var fileContent = await reader.ReadToEndAsync();
 
