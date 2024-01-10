@@ -133,7 +133,7 @@
                 Margin="12,0,0,0"
                 HorizontalOptions="Start"
                 VerticalOptions="Center">
-                <Label Text="Lista (0 itens)">
+                <Label Text="Lista (0 item)">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Style="{StaticResource Paragraph}" Text="Lista " />
@@ -145,7 +145,14 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Label Style="{StaticResource SmallText}" Text="{Binding ListToBuy.Products, Converter={StaticResource TextQuantityOfItensNotCaughtConverter}}" />
+                <Label Style="{StaticResource SmallText}">
+                    <Label.Text>
+                        <MultiBinding Converter="{StaticResource TextQuantityOfItensNotCaughtConverter}">
+                            <Binding Path="ListToBuy.Products" />
+                            <Binding Path="ListToBuy.Products.Count" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
             </VerticalStackLayout>
             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
                 <Label

@@ -13,7 +13,7 @@ namespace AppListaDeCompras.Libraries.Converters
         {
             var productsCount = (int)value!;
 
-            return productsCount > 0 ? "items" : "item";
+            return productsCount > 1 ? "items" : "item";
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
