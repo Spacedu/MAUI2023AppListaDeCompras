@@ -3,6 +3,7 @@ using AppListaDeCompras.Models;
 using AppListaDeCompras.Models.Enums;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using MongoDB.Bson;
 using Mopups.Services;
 using System;
@@ -70,7 +71,8 @@ namespace AppListaDeCompras.ViewModels.Popups
                     ProductForm.CreatedAt = DateTime.UtcNow;
 
                     List.Products.Add(ProductForm);
-                    realm.Add(List, update:true);
+                    realm.Add(List, update:false);
+                    WeakReferenceMessenger.Default.Send(string.Empty);
                 }
                 else
                 {
