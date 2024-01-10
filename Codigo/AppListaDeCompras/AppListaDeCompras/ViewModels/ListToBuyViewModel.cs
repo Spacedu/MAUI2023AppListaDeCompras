@@ -43,6 +43,18 @@ namespace AppListaDeCompras.ViewModels
             };
             Shell.Current.GoToAsync("//ListToBuy/ListOfItens", pageParameter);
         }
-        
+        [RelayCommand]
+        private async Task DeleteList(ListToBuy listSelected)
+        {
+            var resposta = await App.Current.MainPage.DisplayAlert("Excluir lista!", $"Tem certeza que deseja excluir a lista '{listSelected.Name}'?", "Sim", "Não");
+
+            if (resposta)
+            {
+                var realm = MongoDBAtlasService.GetMainThreadRealm();
+                await realm.WriteAsync(() => {
+                    realm.Remove(listSelected);
+                });
+            }
+        }
     }
 }

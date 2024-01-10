@@ -54,6 +54,14 @@
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OpenPopupEditItemPageCommand, Source={x:Reference vm}}" CommandParameter="{Binding .}" />
                         </Grid.GestureRecognizers>
+                        <FlyoutBase.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem
+                                    Command="{Binding DeleteItemCommand, Source={x:Reference vm}}"
+                                    CommandParameter="{Binding .}"
+                                    Text="Excluir" />
+                            </MenuFlyout>
+                        </FlyoutBase.ContextFlyout>
                         <CheckBox HorizontalOptions="End" IsChecked="{Binding HasCaught}" />
                         <VerticalStackLayout
                             Grid.Column="1"

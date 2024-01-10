@@ -66,5 +66,14 @@ namespace AppListaDeCompras.ViewModels
         {
             MopupService.Instance.PushAsync(new ListOfItensAddItemPage(ListToBuy!, product));
         }
+
+        [RelayCommand]
+        private async Task DeleteItem(Product product)
+        {
+            var realm = MongoDBAtlasService.GetMainThreadRealm();
+            await realm.WriteAsync(() => {
+                realm.Remove(product);
+            });
+        }
     }
 }

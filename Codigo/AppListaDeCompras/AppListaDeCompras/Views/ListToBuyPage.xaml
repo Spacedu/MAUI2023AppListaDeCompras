@@ -69,6 +69,8 @@
                                 Style="{StaticResource ButtonBorderless}"
                                 Text="Compartilhar" />
                             <Button
+                                Command="{Binding DeleteListCommand, Source={x:Reference vm}}"
+                                CommandParameter="{Binding .}"
                                 ImageSource="delete.png"
                                 Style="{StaticResource ButtonBorderless}"
                                 Text="Excluir" />
