@@ -1,7 +1,9 @@
-﻿using AppListaDeCompras.Models;
+﻿using AppListaDeCompras.Libraries.Services;
+using AppListaDeCompras.Models;
 using AppListaDeCompras.Views.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MongoDB.Bson;
 using Mopups.Services;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,32 @@ namespace AppListaDeCompras.ViewModels
         {
             get => _listToBuy;
             set => SetProperty(ref _listToBuy, value);
+        }
+        public ListOfItensPageViewModel()
+        {
+            ListToBuy = new ListToBuy();
+        }
+
+        [RelayCommand]
+        private async Task SaveListToBuy()
+        {
+            if (string.IsNullOrWhiteSpace(ListToBuy!.Name))
+                return;
+
+            var realm = MongoDBAtlasService.GetMainThreadRealm();
+            await realm.WriteAsync(() => { 
+                if(ListToBuy!.Id == default(ObjectId))
+                {
+                    ListToBuy.Id = ObjectId.GenerateNewId();
+                    ListToBuy.CreatedAt = DateTime.UtcNow;
+
+                    realm.Add(ListToBuy);
+                }
+                else
+                {
+                    realm.Add(ListToBuy, update: true);
+                }
+            });
         }
 
         [RelayCommand]

@@ -4,14 +4,6 @@ using AppListaDeCompras.Views.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mopups.Services;
-using Realms;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources.Management;
 
 namespace AppListaDeCompras.ViewModels
 {
@@ -37,14 +29,20 @@ namespace AppListaDeCompras.ViewModels
         {
             MopupService.Instance.PushAsync(new ListToBuySharePage(listSelected));
         }
+        [RelayCommand]
+        private void OpenListOfItensToAdd()
+        {
+            Shell.Current.GoToAsync("//ListToBuy/ListOfItens");
+        }
 
         [RelayCommand]
-        private void OpenListOfItensPage(ListToBuy listSelected)
+        private void OpenListOfItensToEdit(ListToBuy listSelected)
         {
             var pageParameter = new Dictionary<string, object>() {
                 { "ListToBuy", listSelected }
             };
             Shell.Current.GoToAsync("//ListToBuy/ListOfItens", pageParameter);
         }
+        
     }
 }

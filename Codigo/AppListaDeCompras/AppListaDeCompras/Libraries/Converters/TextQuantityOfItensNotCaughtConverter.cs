@@ -12,7 +12,7 @@ namespace AppListaDeCompras.Libraries.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            List<Product> products = (List<Product>)value!;
+            IList<Product> products = (IList<Product>)value!;
 
             int notCaughtCount = products.Where(a => a.HasCaught == false).Count();
 
