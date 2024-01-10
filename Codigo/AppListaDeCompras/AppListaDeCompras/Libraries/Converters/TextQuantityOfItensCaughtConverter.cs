@@ -16,7 +16,7 @@ namespace AppListaDeCompras.Libraries.Converters
 
             var caughtCount = products.Where(a => a.HasCaught == true).Count();
 
-            return caughtCount > 0 ? $"{caughtCount} itens": $"{caughtCount} item";
+            return caughtCount > 1 ? $"{caughtCount} itens": $"{caughtCount} item";
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

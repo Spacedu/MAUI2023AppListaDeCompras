@@ -75,5 +75,11 @@ namespace AppListaDeCompras.ViewModels
                 realm.Remove(product);
             });
         }
+
+        [RelayCommand]
+        private void UpdateListToBuy()
+        {
+            OnPropertyChanged(nameof(ListToBuy));
+        }
     }
 }

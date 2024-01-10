@@ -62,7 +62,11 @@
                                     Text="Excluir" />
                             </MenuFlyout>
                         </FlyoutBase.ContextFlyout>
-                        <CheckBox HorizontalOptions="End" IsChecked="{Binding HasCaught}" />
+                        <CheckBox HorizontalOptions="End" IsChecked="{Binding HasCaught}">
+                            <CheckBox.Behaviors>
+                                <toolkit:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding UpdateListToBuyCommand, Source={x:Reference vm}}" />
+                            </CheckBox.Behaviors>
+                        </CheckBox>
                         <VerticalStackLayout
                             Grid.Column="1"
                             Margin="15,15,0,15"
