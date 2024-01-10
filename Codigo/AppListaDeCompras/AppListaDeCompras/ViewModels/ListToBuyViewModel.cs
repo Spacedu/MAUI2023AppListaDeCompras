@@ -4,19 +4,21 @@ using AppListaDeCompras.Views.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mopups.Services;
+using Realms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources.Management;
 
 namespace AppListaDeCompras.ViewModels
 {
     public partial class ListToBuyViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<ListToBuy> _listToBuy;
+        private IQueryable<ListToBuy> _listsOfListToBuy;
         public ListToBuyViewModel() {
         
         }
@@ -26,7 +28,8 @@ namespace AppListaDeCompras.ViewModels
             await MongoDBAtlasService.Init();
             await MongoDBAtlasService.LoginAsync();
 
-            //TODO - Carregar os dados
+            var realm = MongoDBAtlasService.GetMainThreadRealm();
+            ListsOfListToBuy = realm.All<ListToBuy>();
         }
 
         [RelayCommand]

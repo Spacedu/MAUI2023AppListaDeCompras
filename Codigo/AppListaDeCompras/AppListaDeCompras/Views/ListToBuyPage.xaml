@@ -25,7 +25,7 @@
             <Entry HorizontalOptions="FillAndExpand" Placeholder="Pesquisar" />
         </StackLayout>
 
-        <CollectionView Grid.Row="1" ItemsSource="{Binding ListToBuy}">
+        <CollectionView Grid.Row="1" ItemsSource="{Binding ListsOfListToBuy}">
             <CollectionView.Header>
                 <components:HorizontalLine Grid.ColumnSpan="3" Stroke="Gray" />
             </CollectionView.Header>
