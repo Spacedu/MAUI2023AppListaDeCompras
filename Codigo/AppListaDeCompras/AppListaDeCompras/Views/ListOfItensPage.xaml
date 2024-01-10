@@ -52,11 +52,7 @@
                 <DataTemplate>
                     <Grid ColumnDefinitions="60, *, 100" RowDefinitions="Auto, 1">
 
-                        <CheckBox HorizontalOptions="End" IsChecked="{Binding HasCaught}">
-                            <CheckBox.Behaviors>
-                                <toolkit:EventToCommandBehavior Command="{Binding UpdateListToBuyCommand, Source={x:Reference vm}}" EventName="CheckedChanged" />
-                            </CheckBox.Behaviors>
-                        </CheckBox>
+                        <CheckBox HorizontalOptions="End" IsChecked="{Binding HasCaught}" />
                         <VerticalStackLayout
                             Grid.Column="1"
                             Margin="15,15,0,15"
