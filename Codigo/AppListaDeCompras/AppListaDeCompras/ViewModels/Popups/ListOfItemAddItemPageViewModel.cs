@@ -15,8 +15,27 @@ namespace AppListaDeCompras.ViewModels.Popups
 {
     public partial class ListOfItemAddItemPageViewModel : ObservableObject
     {
+        private Product? _product;
+        public Product? Product { 
+            get { return _product; } 
+            set { 
+                _product = value;
+                ProductForm = new Product()
+                {
+                    Id = value.Id,
+                    HasCaught = value.HasCaught,
+                    CreatedAt = value.CreatedAt,
+                    Name = value.Name,
+                    Price = value.Price,
+                    Quantity = value.Quantity,
+                    QuantityUnitMeasure = value.QuantityUnitMeasure
+                };
+            } 
+        }
+
         [ObservableProperty]
-        private Product? product;
+        private Product? productForm;
+
 
         [ObservableProperty]
         private string[] unitsMeasure;
@@ -28,6 +47,7 @@ namespace AppListaDeCompras.ViewModels.Popups
         {
             unitsMeasure = Enum.GetNames(typeof(UnitMeasure));
             Product = new Product();
+            ProductForm = new Product();
         }
         [RelayCommand]
         private void Close()
@@ -39,21 +59,25 @@ namespace AppListaDeCompras.ViewModels.Popups
         private async Task Save()
         {
             //TODO - Validar os dados
+            
 
             //TODO - Salvar as informações
             var realm = MongoDBAtlasService.GetMainThreadRealm();
             await realm.WriteAsync(() => { 
                 if(Product!.Id == default(ObjectId))
                 {
-                    Product.Id = ObjectId.GenerateNewId();
-                    Product.CreatedAt = DateTime.UtcNow;
-                    List.Products.Add(Product);
+                    ProductForm!.Id = ObjectId.GenerateNewId();
+                    ProductForm.CreatedAt = DateTime.UtcNow;
+
+                    List.Products.Add(ProductForm);
                     realm.Add(List, update:true);
                 }
                 else
                 {
-                    //TODO - Fazer o Update.
-                    realm.Add(List, update: true);
+                    Product.Name = ProductForm!.Name;
+                    Product.Quantity = ProductForm.Quantity;
+                    Product.QuantityUnitMeasure = ProductForm.QuantityUnitMeasure;
+                    Product.Price = ProductForm.Price;
                 }
             });
 

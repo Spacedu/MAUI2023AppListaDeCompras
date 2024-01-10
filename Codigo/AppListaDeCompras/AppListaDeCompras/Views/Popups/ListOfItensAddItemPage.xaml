@@ -28,18 +28,18 @@
                 <ImageButton Command="{Binding CloseCommand}" Source="close.png" />
             </StackLayout>
 
-            <Entry Placeholder="Nome do item" Text="{Binding Product.Name}" />
+            <Entry Placeholder="Nome do item" Text="{Binding ProductForm.Name}" />
             <StackLayout Orientation="Horizontal" Spacing="10">
                 <Entry
                     HorizontalOptions="FillAndExpand"
                     Placeholder="Quantidade"
-                    Text="{Binding Product.Quantity}" />
+                    Text="{Binding ProductForm.Quantity}" />
                 <Picker
                     HorizontalOptions="FillAndExpand"
                     ItemsSource="{Binding UnitsMeasure}"
-                    SelectedItem="{Binding Product.QuantityUnitMeasure}" />
+                    SelectedItem="{Binding ProductForm.QuantityUnitMeasure}" />
             </StackLayout>
-            <Entry Placeholder="Preço" Text="{Binding Product.Price}" />
+            <Entry Placeholder="Preço" Text="{Binding ProductForm.Price}" />
 
             <Button Command="{Binding SaveCommand}" Text="Salvar" />
         </VerticalStackLayout>
