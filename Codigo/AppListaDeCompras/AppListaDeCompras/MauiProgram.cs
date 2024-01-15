@@ -2,6 +2,8 @@
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
+using System.Net.Mail;
+using System.Net;
 
 namespace AppListaDeCompras
 {
@@ -22,6 +24,13 @@ namespace AppListaDeCompras
                 });
 
             builder.Services.AddScoped<AddItemValidator>();
+            builder.Services.AddScoped<SmtpClient>(options =>
+            {
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.Credentials = new NetworkCredential("elias.ribeiro.s@gmail.com", "ulsp sokl sofn lkqi");
+                client.EnableSsl = true;
+                return client;
+            });
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
