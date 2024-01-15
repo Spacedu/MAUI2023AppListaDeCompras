@@ -1,4 +1,5 @@
 ﻿using AppListaDeCompras.Libraries.Services;
+using AppListaDeCompras.Libraries.Utilities;
 using AppListaDeCompras.Libraries.Validations;
 using AppListaDeCompras.Models;
 using AppListaDeCompras.Models.Enums;
@@ -46,6 +47,8 @@ namespace AppListaDeCompras.ViewModels.Popups
         private ListToBuy _list;
 
         private AddItemValidator _validator;
+        [ObservableProperty]
+        private string _errorsMessage;
         public ListOfItemAddItemPageViewModel()
         {
             unitsMeasure = Enum.GetNames(typeof(UnitMeasure));
@@ -62,10 +65,12 @@ namespace AppListaDeCompras.ViewModels.Popups
         [RelayCommand]
         private async Task Save()
         {
+            ErrorsMessage = string.Empty;
+
             var validateResult = _validator.Validate(ProductForm!);
             if (!validateResult.IsValid)
             {
-                //TODO - Apresentar Mensagens de Error
+                ErrorsMessage = Validator.ShowErrorMessage(validateResult);
                 return;
             }
 

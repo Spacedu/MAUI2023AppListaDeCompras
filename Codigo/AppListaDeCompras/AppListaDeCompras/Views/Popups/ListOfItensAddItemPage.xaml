@@ -3,6 +3,7 @@
     x:Class="AppListaDeCompras.Views.Popups.ListOfItensAddItemPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:AppListaDeCompras.Libraries.Converters"
     xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
     xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels.Popups"
     Title="ListOfItensAddItemPage"
@@ -11,37 +12,45 @@
     <mopups:PopupPage.BindingContext>
         <vm:ListOfItemAddItemPageViewModel />
     </mopups:PopupPage.BindingContext>
-    <Border
-        BackgroundColor="White"
-        HeightRequest="350"
-        StrokeShape="RoundRectangle 12"
-        StrokeThickness="0"
-        WidthRequest="360">
-        <VerticalStackLayout Padding="20" Spacing="20">
-            <StackLayout Orientation="Horizontal">
+    <mopups:PopupPage.Resources>
+        <converters:ShowIfHaveTextConverter x:Key="ShowIfHaveTextConverter" />
+    </mopups:PopupPage.Resources>
+    <ScrollView>
+        <Border
+            BackgroundColor="White"
+            HeightRequest="530"
+            StrokeShape="RoundRectangle 12"
+            StrokeThickness="0"
+            WidthRequest="360">
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                        Margin="30,0,0,0"
+                        HorizontalOptions="CenterAndExpand"
+                        Style="{StaticResource SmallHeadline}"
+                        Text="Item"
+                        VerticalOptions="Center" />
+                    <ImageButton Command="{Binding CloseCommand}" Source="close.png" />
+                </StackLayout>
                 <Label
-                    Margin="30,0,0,0"
-                    HorizontalOptions="CenterAndExpand"
-                    Style="{StaticResource SmallHeadline}"
-                    Text="Item"
-                    VerticalOptions="Center" />
-                <ImageButton Command="{Binding CloseCommand}" Source="close.png" />
-            </StackLayout>
+                    IsVisible="{Binding ErrorsMessage, Converter={StaticResource ShowIfHaveTextConverter}}"
+                    Text="{Binding ErrorsMessage}"
+                    TextColor="Red" />
+                <Entry Placeholder="Nome do item" Text="{Binding ProductForm.Name}" />
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Entry
+                        HorizontalOptions="FillAndExpand"
+                        Placeholder="Quantidade"
+                        Text="{Binding ProductForm.Quantity}" />
+                    <Picker
+                        HorizontalOptions="FillAndExpand"
+                        ItemsSource="{Binding UnitsMeasure}"
+                        SelectedItem="{Binding ProductForm.QuantityUnitMeasure}" />
+                </StackLayout>
+                <Entry Placeholder="Preço" Text="{Binding ProductForm.Price}" />
 
-            <Entry Placeholder="Nome do item" Text="{Binding ProductForm.Name}" />
-            <StackLayout Orientation="Horizontal" Spacing="10">
-                <Entry
-                    HorizontalOptions="FillAndExpand"
-                    Placeholder="Quantidade"
-                    Text="{Binding ProductForm.Quantity}" />
-                <Picker
-                    HorizontalOptions="FillAndExpand"
-                    ItemsSource="{Binding UnitsMeasure}"
-                    SelectedItem="{Binding ProductForm.QuantityUnitMeasure}" />
-            </StackLayout>
-            <Entry Placeholder="Preço" Text="{Binding ProductForm.Price}" />
-
-            <Button Command="{Binding SaveCommand}" Text="Salvar" />
-        </VerticalStackLayout>
-    </Border>
+                <Button Command="{Binding SaveCommand}" Text="Salvar" />
+            </VerticalStackLayout>
+        </Border>
+    </ScrollView>
 </mopups:PopupPage>
