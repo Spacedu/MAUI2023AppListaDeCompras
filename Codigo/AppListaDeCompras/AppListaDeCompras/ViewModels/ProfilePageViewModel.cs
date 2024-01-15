@@ -33,17 +33,19 @@ namespace AppListaDeCompras.ViewModels
 
             if (userDb == null)
             {
-                //TODO - Enviar o AccessCode por e-mail
                 await realm.WriteAsync(() => {
                     realm.Add(User);
                 });
+
+                Libraries.Utilities.Email.SendMailWithAccessCode(User);
             }
             else
             {
-                //TODO - Enviar o AccessCode por e-mail
                 await realm.WriteAsync(() => {
                     realm.Add(User, update: true);
                 });
+
+                Libraries.Utilities.Email.SendMailWithAccessCode(User);
             }
 
             var parameters = new Dictionary<string, object>();
