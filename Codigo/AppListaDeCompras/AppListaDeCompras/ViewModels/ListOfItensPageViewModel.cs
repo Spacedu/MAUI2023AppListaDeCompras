@@ -21,8 +21,14 @@ namespace AppListaDeCompras.ViewModels
         public ListToBuy? ListToBuy
         {
             get => _listToBuy;
-            set => SetProperty(ref _listToBuy, value);
+            set {
+                ListToBuyName = value!.Name;
+                SetProperty(ref _listToBuy, value);
+            }
         }
+
+        [ObservableProperty]
+        private string listToBuyName;
         public ListOfItensPageViewModel()
         {
             ListToBuy = new ListToBuy();
@@ -35,20 +41,24 @@ namespace AppListaDeCompras.ViewModels
         [RelayCommand]
         private async Task SaveListToBuy()
         {
-            if (string.IsNullOrWhiteSpace(ListToBuy!.Name))
+            if (string.IsNullOrWhiteSpace(ListToBuyName)) {
+                await App.Current!.MainPage!.DisplayAlert("Validação", "O nome da lista deve ser preenchido!", "OK");
                 return;
+            }
 
             var realm = MongoDBAtlasService.GetMainThreadRealm();
             await realm.WriteAsync(() => { 
                 if(ListToBuy!.Id == default(ObjectId))
                 {
                     ListToBuy.Id = ObjectId.GenerateNewId();
+                    ListToBuy.Name = ListToBuyName;
                     ListToBuy.CreatedAt = DateTime.UtcNow;
 
                     realm.Add(ListToBuy);
                 }
                 else
                 {
+                    ListToBuy.Name = ListToBuyName;
                     realm.Add(ListToBuy, update: true);
                 }
             });
