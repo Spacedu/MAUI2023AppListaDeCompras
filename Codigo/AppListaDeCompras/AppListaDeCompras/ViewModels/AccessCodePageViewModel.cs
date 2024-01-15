@@ -9,15 +9,39 @@ using System.Threading.Tasks;
 
 namespace AppListaDeCompras.ViewModels
 {
+    [QueryProperty(nameof(User), "usuario")]
     public partial class AccessCodePageViewModel : ObservableObject
     {
+        
         [ObservableProperty]
         private User user;
 
+        [ObservableProperty]
+        private string accessCode;
+
         [RelayCommand]
-        private void VerifyAccessCode()
+        private async Task VerifyAccessCode()
         {
-            throw new NotImplementedException();
+            if(AccessCode == User.AccessCodeTemp)
+            {
+                var finalDate = User.AccessCodeTempCreatedAt.AddMinutes(5);
+
+                if(DateTime.UtcNow > finalDate)
+                {
+                    await App.Current!.MainPage!.DisplayAlert("Alerta!", "Código de acesso expirado!", "Ok");
+                    return;
+                }
+
+                //TODO - Registrar o Login do Usuário.
+
+            }
+            else
+            {
+                await App.Current!.MainPage!.DisplayAlert("Alerta!", "Código de acesso inválido!", "Ok");
+                AccessCode = string.Empty;
+                return;
+            }
+            
         }
     }
 }

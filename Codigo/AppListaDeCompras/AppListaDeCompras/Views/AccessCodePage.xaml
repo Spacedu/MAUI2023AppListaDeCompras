@@ -26,7 +26,7 @@
                 Text="Enviamos um código para o seu e-mail,&#10;informe ele abaixo" />
             <Entry
                 Placeholder="Código de acesso"
-                Text="{Binding User.AccessCodeTemp}"
+                Text="{Binding AccessCode}"
                 VerticalOptions="EndAndExpand" />
             <Button
                 Command="{Binding }"
