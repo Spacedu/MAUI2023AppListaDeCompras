@@ -1,4 +1,5 @@
-﻿using AppListaDeCompras.Models;
+﻿using AppListaDeCompras.Libraries.Services;
+using AppListaDeCompras.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -22,7 +23,47 @@ namespace AppListaDeCompras.ViewModels
         [RelayCommand]
         private async void NavigateToAccessCodePage()
         {
-            await Shell.Current.GoToAsync("//Profile/AccessCode");
+            //TODO - Validar dados
+
+
+            
+            var realm = MongoDBAtlasService.GetMainThreadRealm();
+            var userDb = realm.All<User>().FirstOrDefault(a=>a.Email == User!.Email.Trim().ToLower());
+
+            if (userDb == null)
+            {
+                //TODO - Se Não existir usuário criar um novo e emitir um novo AccessCode;
+
+                //TODO - Gerar AccessCode
+                User.AccessCodeTemp = "1234";
+                User.AccessCodeTempCreatedAt = DateTime.UtcNow;
+
+                //TODO - Enviar o AccessCode por e-mail
+
+
+                await realm.WriteAsync(() => {
+                    realm.Add(User);
+                });
+            }
+            else
+            {
+                //TODO - Se usuário existe emitir novo AccessCode e atualiza o nome;
+
+
+                //TODO - Gerar AccessCode
+                User.AccessCodeTemp = "1234";
+                User.AccessCodeTempCreatedAt = DateTime.UtcNow;
+                
+                //TODO - Enviar o AccessCode por e-mail
+
+                await realm.WriteAsync(() => {
+                    realm.Add(User, update: true);
+                });
+            }
+
+            var parameters = new Dictionary<string, object>();
+            parameters.Add("usuario", User);
+            await Shell.Current.GoToAsync("//Profile/AccessCode", parameters);
         }
     }
 }
