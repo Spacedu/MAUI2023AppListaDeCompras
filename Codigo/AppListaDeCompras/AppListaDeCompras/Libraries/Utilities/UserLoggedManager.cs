@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace AppListaDeCompras.Libraries.Utilities
@@ -25,7 +26,9 @@ namespace AppListaDeCompras.Libraries.Utilities
         {
             RemoveUser();
 
-            Preferences.Set(_key, JsonSerializer.Serialize(user));
+            var userToJsonSerilizer = new { user.Id, user.Name, user.Email, user.CreatedAt };
+            
+            Preferences.Set(_key, JsonSerializer.Serialize(userToJsonSerilizer));
         }
         public static void RemoveUser()
         {

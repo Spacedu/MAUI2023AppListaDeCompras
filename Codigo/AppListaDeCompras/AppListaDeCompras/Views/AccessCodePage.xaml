@@ -29,7 +29,7 @@
                 Text="{Binding AccessCode}"
                 VerticalOptions="EndAndExpand" />
             <Button
-                Command="{Binding }"
+                Command="{Binding VerifyAccessCodeCommand}"
                 SemanticProperties.Description="Acessa a próxima tela do app, tela de cadastro de lista de compras"
                 SemanticProperties.Hint="Acessar"
                 Text="Confirmar" />
