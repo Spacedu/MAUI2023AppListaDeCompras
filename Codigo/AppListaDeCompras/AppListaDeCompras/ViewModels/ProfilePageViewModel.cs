@@ -46,6 +46,7 @@ namespace AppListaDeCompras.ViewModels
         private async void Logout()
         {
             UserLoggedManager.RemoveUser();
+            User = new User();
             IsLogged = false;
         }
 
@@ -54,16 +55,17 @@ namespace AppListaDeCompras.ViewModels
         {
             //TODO - Validar dados
             var realm = MongoDBAtlasService.GetMainThreadRealm();
-            var userDb = realm.All<User>().FirstOrDefault(a=>a.Email == User!.Email.Trim().ToLower());
+            var userDb = realm.All<User>().Where(a=>a.Email == User!.Email.Trim().ToLower()).FirstOrDefault();
 
-            User.AccessCodeTemp = Text.GerarNumeroAleatorio().ToString();
-            User.AccessCodeTempCreatedAt = DateTime.UtcNow;
+            
 
             if (userDb == null)
-            {
-                User.CreatedAt = DateTime.UtcNow;
-                User.Id = ObjectId.GenerateNewId();
+            {   
                 await realm.WriteAsync(() => {
+                    User.AccessCodeTemp = Text.GerarNumeroAleatorio().ToString();
+                    User.AccessCodeTempCreatedAt = DateTime.UtcNow;
+                    User.CreatedAt = DateTime.UtcNow;
+                    User.Id = ObjectId.GenerateNewId();
                     realm.Add(User);
                 });
 
@@ -71,10 +73,13 @@ namespace AppListaDeCompras.ViewModels
             }
             else
             {
-                User.Id = userDb.Id;
-                User.CreatedAt = userDb.CreatedAt;
-                User.Name = userDb.Name;
+                
                 await realm.WriteAsync(() => {
+                    User.Id = userDb.Id;
+                    User.CreatedAt = userDb.CreatedAt;
+                    User.Name = userDb.Name;
+                    User.AccessCodeTemp = Text.GerarNumeroAleatorio().ToString();
+                    User.AccessCodeTempCreatedAt = DateTime.UtcNow;
                     realm.Add(User, update: true);
                 });
 
