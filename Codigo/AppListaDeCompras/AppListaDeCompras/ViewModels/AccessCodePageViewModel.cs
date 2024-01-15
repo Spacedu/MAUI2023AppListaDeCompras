@@ -33,7 +33,7 @@ namespace AppListaDeCompras.ViewModels
                 }
 
                 //TODO - Registrar o Login do Usuário.
-
+                
             }
             else
             {
