@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui;
+﻿using AppListaDeCompras.Libraries.Validations;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
 
@@ -20,6 +21,7 @@ namespace AppListaDeCompras
                     fonts.AddFont("Poppins-ExtraBold.ttf", "PoppinsExtraBold");  //OpenSansSemibold
                 });
 
+            builder.Services.AddScoped<AddItemValidator>();
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
