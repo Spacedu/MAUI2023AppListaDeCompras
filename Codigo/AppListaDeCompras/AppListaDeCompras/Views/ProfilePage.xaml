@@ -3,28 +3,47 @@
     x:Class="AppListaDeCompras.Views.ProfilePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:AppListaDeCompras.ViewModels"
     Title="ProfilePage">
+    <ContentPage.Resources>
+        <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+    </ContentPage.Resources>
     <ContentPage.BindingContext>
         <vm:ProfilePageViewModel />
     </ContentPage.BindingContext>
     <ScrollView>
-        <StackLayout Padding="30" Spacing="20">
-            <Image
-                HeightRequest="{OnPlatform Default=330,
-                                           Android=290}"
-                SemanticProperties.Description="Imagem de um envelope de e-mail"
-                Source="image_mail.png" />
-            <Entry
-                Placeholder="Digite seu nome"
-                Text="{Binding User.Name}"
-                VerticalOptions="EndAndExpand" />
-            <Entry Placeholder="Digite seu e-mail" Text="{Binding User.Email}" />
-            <Button
-                Command="{Binding NavigateToAccessCodePageCommand}"
-                SemanticProperties.Description="Acessa a próxima tela do app, para informar o código de acesso enviado para o seu e-mail"
-                SemanticProperties.Hint="Salvar"
-                Text="Salvar" />
+        <StackLayout Padding="30">
+            <VerticalStackLayout IsVisible="{Binding IsLogged, Converter={StaticResource InvertedBoolConverter}}" Spacing="20">
+                <Image
+                    HeightRequest="{OnPlatform Default=330,
+                                               Android=290}"
+                    SemanticProperties.Description="Imagem de um envelope de e-mail"
+                    Source="image_mail.png" />
+                <Entry
+                    Placeholder="Digite seu nome"
+                    Text="{Binding User.Name}"
+                    VerticalOptions="EndAndExpand" />
+                <Entry Placeholder="Digite seu e-mail" Text="{Binding User.Email}" />
+                <Button
+                    Command="{Binding NavigateToAccessCodePageCommand}"
+                    SemanticProperties.Description="Acessa a próxima tela do app, para informar o código de acesso enviado para o seu e-mail"
+                    SemanticProperties.Hint="Salvar"
+                    Text="Salvar" />
+            </VerticalStackLayout>
+            <VerticalStackLayout IsVisible="{Binding IsLogged}" Spacing="20">
+                <Image
+                    HeightRequest="{OnPlatform Default=330,
+                                               Android=290}"
+                    SemanticProperties.Description="Imagem de um cadeado"
+                    Source="image_password.png" />
+                <Label
+                    SemanticProperties.HeadingLevel="Level1"
+                    Style="{StaticResource Headline}"
+                    Text="{Binding TextUserLogged}"
+                    VerticalOptions="EndAndExpand" />
+                <Button Command="{Binding LogoutCommand}" Text="Sair" />
+            </VerticalStackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -3,6 +3,8 @@ using AppListaDeCompras.Libraries.Utilities;
 using AppListaDeCompras.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +16,34 @@ namespace AppListaDeCompras.ViewModels
     public partial class ProfilePageViewModel : ObservableObject
     {
         [ObservableProperty]
+        private bool isLogged;
+        [ObservableProperty]
+        private string textUserLogged;
+
+        [ObservableProperty]
         private User user;
 
         public ProfilePageViewModel()
         {
             user = new User();
+            GetLoggedUserMessage();
+
+            WeakReferenceMessenger.Default.Register(string.Empty, (object obj, string str) => {
+                GetLoggedUserMessage();
+            });
+        }
+
+        private void GetLoggedUserMessage()
+        {
+            IsLogged = UserLoggedManager.ExistsUser();
+            var user = UserLoggedManager.GetUser();
+            TextUserLogged = $"Usuário logado! {user.Name} ({user.Email})";
+        }
+        [RelayCommand]
+        private async void Logout()
+        {
+            UserLoggedManager.RemoveUser();
+            IsLogged = false;
         }
 
         [RelayCommand]

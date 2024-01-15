@@ -83,11 +83,11 @@
             </VisualStateGroupList>
         </Setter>
     </Style>
-    <Style TargetType="Button" x:Key="ButtonTransparent">
+    <Style x:Key="ButtonTransparent" TargetType="Button">
         <Setter Property="BorderWidth" Value="1" />
-        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDark}}"/>
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDark}}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">

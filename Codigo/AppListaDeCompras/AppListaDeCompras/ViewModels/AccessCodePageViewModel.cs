@@ -1,6 +1,8 @@
-﻿using AppListaDeCompras.Models;
+﻿using AppListaDeCompras.Libraries.Utilities;
+using AppListaDeCompras.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +34,11 @@ namespace AppListaDeCompras.ViewModels
                     return;
                 }
 
-                //TODO - Registrar o Login do Usuário.
-                
+                UserLoggedManager.SetUser(User);
+
+                WeakReferenceMessenger.Default.Send(string.Empty);
+
+                await AppShell.Current.GoToAsync("../");
             }
             else
             {
