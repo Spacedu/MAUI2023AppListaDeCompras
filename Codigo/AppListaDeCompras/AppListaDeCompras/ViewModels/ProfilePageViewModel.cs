@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FluentValidation.Results;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,8 +37,10 @@ namespace AppListaDeCompras.ViewModels
         private void GetLoggedUserMessage()
         {
             IsLogged = UserLoggedManager.ExistsUser();
-            var user = UserLoggedManager.GetUser();
-            TextUserLogged = $"Usuário logado! {user.Name} ({user.Email})";
+            if (IsLogged) { 
+                var user = UserLoggedManager.GetUser();
+                TextUserLogged = $"Usuário logado! {user.Name} ({user.Email})";
+            }
         }
         [RelayCommand]
         private async void Logout()
@@ -58,6 +61,8 @@ namespace AppListaDeCompras.ViewModels
 
             if (userDb == null)
             {
+                User.CreatedAt = DateTime.UtcNow;
+                User.Id = ObjectId.GenerateNewId();
                 await realm.WriteAsync(() => {
                     realm.Add(User);
                 });
@@ -66,6 +71,9 @@ namespace AppListaDeCompras.ViewModels
             }
             else
             {
+                User.Id = userDb.Id;
+                User.CreatedAt = userDb.CreatedAt;
+                User.Name = userDb.Name;
                 await realm.WriteAsync(() => {
                     realm.Add(User, update: true);
                 });
