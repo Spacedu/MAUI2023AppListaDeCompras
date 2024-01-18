@@ -1,9 +1,12 @@
 ﻿using AppListaDeCompras.Libraries.Services;
+using AppListaDeCompras.Libraries.Utilities;
 using AppListaDeCompras.Models;
 using AppListaDeCompras.Views.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MongoDB.Bson;
 using Mopups.Services;
+using Realms;
 
 namespace AppListaDeCompras.ViewModels
 {
@@ -21,7 +24,18 @@ namespace AppListaDeCompras.ViewModels
             await MongoDBAtlasService.LoginAsync();
 
             var realm = MongoDBAtlasService.GetMainThreadRealm();
-            ListsOfListToBuy = realm.All<ListToBuy>();
+
+            if (UserLoggedManager.ExistsUser())
+            {
+                ListsOfListToBuy = realm.All<ListToBuy>().Filter("ANY Users.Id == $0", UserLoggedManager.GetUser().Id);
+            }
+            else
+            {
+                var anonymousId = new ObjectId(MongoDBAtlasService.CurrentUser.Id);
+                ListsOfListToBuy = realm.All<ListToBuy>().Where(a=>a.AnonymousUserId == anonymousId);
+            }
+
+            
         }
 
         [RelayCommand]
