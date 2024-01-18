@@ -29,9 +29,13 @@ namespace AppListaDeCompras.ViewModels
             user = new User();
             GetLoggedUserMessage();
 
-            WeakReferenceMessenger.Default.Register(string.Empty, (object obj, string str) => {
-                GetLoggedUserMessage();
-            });
+            if (!WeakReferenceMessenger.Default.IsRegistered<string>(string.Empty))
+            {
+                WeakReferenceMessenger.Default.Register(string.Empty, (object obj, string str) =>
+                {
+                    GetLoggedUserMessage();
+                });
+            }
         }
 
         private void GetLoggedUserMessage()

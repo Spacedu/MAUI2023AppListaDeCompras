@@ -33,9 +33,12 @@ namespace AppListaDeCompras.ViewModels
         {
             ListToBuy = new ListToBuy();
 
-            WeakReferenceMessenger.Default.Register<string>(string.Empty, (obj, str) => {
-                UpdateListToBuy();
-            });
+            if (!WeakReferenceMessenger.Default.IsRegistered<string>(string.Empty))
+            {
+                WeakReferenceMessenger.Default.Register<string>(string.Empty, (obj, str) => {
+                    UpdateListToBuy();
+                });
+            }            
         }
 
         [RelayCommand]
