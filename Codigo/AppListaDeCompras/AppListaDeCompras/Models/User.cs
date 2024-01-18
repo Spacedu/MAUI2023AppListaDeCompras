@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using AppListaDeCompras.Libraries.Utilities;
 
 namespace AppListaDeCompras.Models
 {
@@ -12,6 +14,7 @@ namespace AppListaDeCompras.Models
     {
         [PrimaryKey]
         [MapTo("_id")]
+        [JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId Id { get; set; }
 
         [MapTo("name")]
