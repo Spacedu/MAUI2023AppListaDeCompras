@@ -1,4 +1,5 @@
 ﻿using AppListaDeCompras.Libraries.Services;
+using AppListaDeCompras.Libraries.Utilities;
 using AppListaDeCompras.Models;
 using AppListaDeCompras.Views.Popups;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -56,6 +57,19 @@ namespace AppListaDeCompras.ViewModels
                     ListToBuy.Id = ObjectId.GenerateNewId();
                     ListToBuy.Name = ListToBuyName;
                     ListToBuy.CreatedAt = DateTime.UtcNow;
+                    //Mongo > App Services > App User (User Anonymous)
+                    ListToBuy.AnonymousUserId = new ObjectId(MongoDBAtlasService.CurrentUser.Id);
+
+                    if (UserLoggedManager.ExistsUser())
+                    {
+                        var user = UserLoggedManager.GetUser();
+                        var userDB = realm.All<User>().Where(a => a.Id == user.Id).FirstOrDefault();
+
+                        if(userDB != null)
+                        {
+                            ListToBuy.Users.Add(userDB);
+                        }
+                    }
 
                     realm.Add(ListToBuy);
                 }

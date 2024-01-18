@@ -13,6 +13,8 @@ namespace AppListaDeCompras.Models
         [PrimaryKey]
         [MapTo("_id")]
         public ObjectId Id { get; set; }
+        [MapTo("_anonymousUserId")]
+        public ObjectId AnonymousUserId { get; set; }
 
         [MapTo("name")]
         public string Name { get; set; } = string.Empty;
