@@ -34,9 +34,9 @@ namespace AppListaDeCompras.ViewModels
         {
             ListToBuy = new ListToBuy();
 
-            if (!WeakReferenceMessenger.Default.IsRegistered<string>(string.Empty))
+            if (!WeakReferenceMessenger.Default.IsRegistered<string>("NewItem"))
             {
-                WeakReferenceMessenger.Default.Register<string>(string.Empty, (obj, str) => {
+                WeakReferenceMessenger.Default.Register<string>("NewItem", (obj, str) => {
                     UpdateListToBuy();
                 });
             }            

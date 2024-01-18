@@ -36,7 +36,7 @@ namespace AppListaDeCompras.ViewModels
 
                 UserLoggedManager.SetUser(User);
 
-                WeakReferenceMessenger.Default.Send(string.Empty);
+                WeakReferenceMessenger.Default.Send("Logado");
 
                 await AppShell.Current.GoToAsync("../");
             }

@@ -83,7 +83,7 @@ namespace AppListaDeCompras.ViewModels.Popups
 
                     List.Products.Add(ProductForm);
                     realm.Add(List, update:false);
-                    WeakReferenceMessenger.Default.Send(string.Empty);
+                    WeakReferenceMessenger.Default.Send("NewItem");
                 }
                 else
                 {
