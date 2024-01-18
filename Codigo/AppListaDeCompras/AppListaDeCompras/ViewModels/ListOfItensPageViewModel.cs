@@ -58,7 +58,7 @@ namespace AppListaDeCompras.ViewModels
                     ListToBuy.Name = ListToBuyName;
                     ListToBuy.CreatedAt = DateTime.UtcNow;
                     //Mongo > App Services > App User (User Anonymous)
-                    ListToBuy.AnonymousUserId = new ObjectId(MongoDBAtlasService.CurrentUser.Id);
+                    
 
                     if (UserLoggedManager.ExistsUser())
                     {
@@ -69,6 +69,10 @@ namespace AppListaDeCompras.ViewModels
                         {
                             ListToBuy.Users.Add(userDB);
                         }
+                    }
+                    else
+                    {
+                        ListToBuy.AnonymousUserId = new ObjectId(MongoDBAtlasService.CurrentUser.Id);
                     }
 
                     realm.Add(ListToBuy);
