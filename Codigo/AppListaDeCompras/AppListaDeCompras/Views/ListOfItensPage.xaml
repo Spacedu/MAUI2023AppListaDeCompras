@@ -50,65 +50,74 @@
             </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="60, *, 100" RowDefinitions="Auto, 1">
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenPopupEditItemPageCommand, Source={x:Reference vm}}" CommandParameter="{Binding .}" />
-                        </Grid.GestureRecognizers>
-                        <FlyoutBase.ContextFlyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem
-                                    Command="{Binding DeleteItemCommand, Source={x:Reference vm}}"
-                                    CommandParameter="{Binding .}"
-                                    Text="Excluir" />
-                            </MenuFlyout>
-                        </FlyoutBase.ContextFlyout>
-                        <CheckBox HorizontalOptions="End" IsChecked="{Binding HasCaught}">
-                            <CheckBox.Behaviors>
-                                <toolkit:EventToCommandBehavior Command="{Binding UpdateListToBuyCommand, Source={x:Reference vm}}" EventName="CheckedChanged" />
-                            </CheckBox.Behaviors>
-                        </CheckBox>
-                        <VerticalStackLayout
-                            Grid.Column="1"
-                            Margin="15,15,0,15"
-                            VerticalOptions="Center">
-                            <Label Style="{StaticResource Paragraph}" Text="{Binding Name}" />
-                            <HorizontalStackLayout>
-                                <Label Style="{StaticResource SmallText}" Text="Quantidade: " />
-                                <Label Style="{StaticResource SmallText}" Text="{Binding Quantity}" />
-                                <Label Style="{StaticResource SmallText}" Text="{Binding QuantityUnitMeasure}" />
-                            </HorizontalStackLayout>
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Grid.Column="2" VerticalOptions="Center">
-                            <Label IsVisible="{Binding HasCaught}">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Style="{StaticResource SmallText}" Text="{Binding Quantity}" />
-                                        <Span Style="{StaticResource SmallText}" Text="{Binding QuantityUnitMeasure}" />
-                                        <Span Style="{StaticResource SmallText}" Text=" x " />
-                                        <Span Style="{StaticResource SmallText}" Text="{Binding Price, StringFormat='{0:C}'}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <Label
-                                HorizontalOptions="Start"
-                                Style="{StaticResource SubHeadline}"
-                                TextColor="{Binding HasCaught, Converter={StaticResource ColorTotalPriceOfItensInCartConverter}}"
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItem
+                                BackgroundColor="Red"
+                                Command="{Binding DeleteItemCommand, Source={x:Reference vm}}"
+                                CommandParameter="{Binding .}"
+                                Text="Excluir" />
+                        </SwipeView.RightItems>
+                        <Grid ColumnDefinitions="60, *, 100" RowDefinitions="Auto, 1">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenPopupEditItemPageCommand, Source={x:Reference vm}}" CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+                            <FlyoutBase.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem
+                                        Command="{Binding DeleteItemCommand, Source={x:Reference vm}}"
+                                        CommandParameter="{Binding .}"
+                                        Text="Excluir" />
+                                </MenuFlyout>
+                            </FlyoutBase.ContextFlyout>
+                            <CheckBox HorizontalOptions="End" IsChecked="{Binding HasCaught}">
+                                <CheckBox.Behaviors>
+                                    <toolkit:EventToCommandBehavior Command="{Binding UpdateListToBuyCommand, Source={x:Reference vm}}" EventName="CheckedChanged" />
+                                </CheckBox.Behaviors>
+                            </CheckBox>
+                            <VerticalStackLayout
+                                Grid.Column="1"
+                                Margin="15,15,0,15"
                                 VerticalOptions="Center">
-                                <Label.Text>
-                                    <MultiBinding Converter="{StaticResource TextTotalPriceOfItemInCartConverter}">
-                                        <Binding Path="." />
-                                        <Binding Path="HasCaught" />
-                                    </MultiBinding>
-                                </Label.Text>
-                            </Label>
-                        </VerticalStackLayout>
+                                <Label Style="{StaticResource Paragraph}" Text="{Binding Name}" />
+                                <HorizontalStackLayout>
+                                    <Label Style="{StaticResource SmallText}" Text="Quantidade: " />
+                                    <Label Style="{StaticResource SmallText}" Text="{Binding Quantity}" />
+                                    <Label Style="{StaticResource SmallText}" Text="{Binding QuantityUnitMeasure}" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2" VerticalOptions="Center">
+                                <Label IsVisible="{Binding HasCaught}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Style="{StaticResource SmallText}" Text="{Binding Quantity}" />
+                                            <Span Style="{StaticResource SmallText}" Text="{Binding QuantityUnitMeasure}" />
+                                            <Span Style="{StaticResource SmallText}" Text=" x " />
+                                            <Span Style="{StaticResource SmallText}" Text="{Binding Price, StringFormat='{0:C}'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label
+                                    HorizontalOptions="Start"
+                                    Style="{StaticResource SubHeadline}"
+                                    TextColor="{Binding HasCaught, Converter={StaticResource ColorTotalPriceOfItensInCartConverter}}"
+                                    VerticalOptions="Center">
+                                    <Label.Text>
+                                        <MultiBinding Converter="{StaticResource TextTotalPriceOfItemInCartConverter}">
+                                            <Binding Path="." />
+                                            <Binding Path="HasCaught" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                            </VerticalStackLayout>
 
 
-                        <components:HorizontalLine
-                            Grid.Row="1"
-                            Grid.ColumnSpan="3"
-                            Stroke="Gray" />
-                    </Grid>
+                            <components:HorizontalLine
+                                Grid.Row="1"
+                                Grid.ColumnSpan="3"
+                                Stroke="Gray" />
+                        </Grid>
+                    </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             <CollectionView.EmptyView>
