@@ -30,8 +30,8 @@
                     <ImageButton Command="{Binding CloseCommand}" Source="close.png" />
                 </StackLayout>
 
-                <Entry Placeholder="E-mail" />
-                <Button Text="Adicionar" />
+                <Entry Placeholder="E-mail" Text="{Binding Email}" />
+                <Button Command="{Binding AddCommand}" Text="Adicionar" />
             </VerticalStackLayout>
 
             <CollectionView ItemsSource="{Binding List.Users}">
