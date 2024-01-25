@@ -16,6 +16,12 @@
         <Setter Property="StrokeShape" Value="Rectangle" />
         <Setter Property="StrokeThickness" Value="1" />
     </Style>
+    <Style x:Key="FormBorder" TargetType="Border">
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray150}, Dark={StaticResource Gray500}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 7" />
+        <Setter Property="StrokeThickness" Value="{OnPlatform Default=0, Android=1}" />
+        <Setter Property="Padding" Value="{OnPlatform Default=0, Android='10, 0'}" />
+    </Style>
 
     <Style TargetType="BoxView">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />

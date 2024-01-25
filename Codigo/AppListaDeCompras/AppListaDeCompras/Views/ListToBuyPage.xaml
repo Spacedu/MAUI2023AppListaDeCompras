@@ -23,17 +23,23 @@
     </ContentPage.BindingContext>
     <Grid RowDefinitions="75, *">
         <StackLayout Padding="10" Orientation="Horizontal">
-            <Entry
-                x:Name="EntrySearch"
+            <Border
+                Margin="0"
                 HorizontalOptions="FillAndExpand"
-                Placeholder="Pesquisar">
-                <Entry.Behaviors>
-                    <toolkit:EventToCommandBehavior
-                        Command="{Binding SearchCommand}"
-                        CommandParameter="{x:Reference EntrySearch}"
-                        EventName="TextChanged" />
-                </Entry.Behaviors>
-            </Entry>
+                Style="{StaticResource FormBorder}">
+                <Entry
+                    x:Name="EntrySearch"
+                    Margin="0"
+                    Placeholder="Pesquisar"
+                    VerticalOptions="Center">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            Command="{Binding SearchCommand}"
+                            CommandParameter="{x:Reference EntrySearch}"
+                            EventName="TextChanged" />
+                    </Entry.Behaviors>
+                </Entry>
+            </Border>
         </StackLayout>
 
         <CollectionView Grid.Row="1" ItemsSource="{Binding ListsOfListToBuy}">

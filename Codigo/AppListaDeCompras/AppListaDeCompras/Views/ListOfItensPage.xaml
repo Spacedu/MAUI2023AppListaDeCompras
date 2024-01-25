@@ -28,15 +28,20 @@
                 Command="{Binding BackPageCommand}"
                 HeightRequest="37"
                 Source="back.png" />
-            <Entry
+            <Border
                 Margin="15,0,0,0"
                 HorizontalOptions="FillAndExpand"
-                Placeholder="Nome da lista"
-                Text="{Binding ListToBuyName}">
-                <Entry.Behaviors>
-                    <toolkit:EventToCommandBehavior Command="{Binding SaveListToBuyCommand}" EventName="Unfocused" />
-                </Entry.Behaviors>
-            </Entry>
+                Style="{StaticResource FormBorder}">
+                <Entry
+                    HorizontalOptions="FillAndExpand"
+                    Placeholder="Nome da lista"
+                    Text="{Binding ListToBuyName}"
+                    VerticalOptions="Center">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior Command="{Binding SaveListToBuyCommand}" EventName="Unfocused" />
+                    </Entry.Behaviors>
+                </Entry>
+            </Border>
         </StackLayout>
         <Label
             Grid.Row="1"
