@@ -14,6 +14,8 @@ namespace AppListaDeCompras.ViewModels
     {
         [ObservableProperty]
         private IQueryable<ListToBuy> _listsOfListToBuy;
+        
+        private IQueryable<ListToBuy> _backupListsOfListToBuy;
         public ListToBuyViewModel() {
         
         }
@@ -34,10 +36,16 @@ namespace AppListaDeCompras.ViewModels
                 var anonymousId = new ObjectId(MongoDBAtlasService.CurrentUser.Id);
                 ListsOfListToBuy = realm.All<ListToBuy>().Where(a=>a.AnonymousUserId == anonymousId);
             }
-
-            
+            _backupListsOfListToBuy = ListsOfListToBuy;
         }
 
+        [RelayCommand]
+        private void Search(Entry entry)
+        {
+            string word = string.IsNullOrWhiteSpace(entry.Text) ? "" : entry.Text;
+
+            ListsOfListToBuy = _backupListsOfListToBuy.Where(a => a.Name.Contains(word, StringComparison.OrdinalIgnoreCase));
+        }
         [RelayCommand]
         private void OpenPopupSharePage(ListToBuy listSelected)
         {
