@@ -8,9 +8,9 @@ Projeto do curso de .NET MAUI - Lista de Compras. Neste projeto se encontra o c�
 
 # Assuntos envolvidos
 Neste curso os seguintes temas são abordados:
-- .NET MAUI + Mongo DB Atlas
--- Autenticação
--- Integração dos modelos C# com as collections do MongoDB.
--- Armazenamento Offline.
--- Sincronização de dados (Online/Offline).
--- Real-time Database.
+- .NET MAUI + Mongo DB Atlas. 
+- Autenticação.
+- Integração dos modelos C# com as collections do MongoDB.
+- Armazenamento Offline.
+- Sincronização de dados (Online/Offline).
+- Real-time Database.
